@@ -1,0 +1,3 @@
+rootProject.name = "carInfo"
+include ':app'
+include ':usbSerialForAndroid'
