@@ -54,7 +54,7 @@ public class MainActivity<usbIoManager> extends AppCompatActivity {
         btnExit = findViewById(R.id.btn_exit);
 
         // 默认显示温湿度页面
-        switchFragment(tabCFM_b);
+        switchFragment(tabCFM_vedio);
 
         // 按钮点击事件
         btnTemp.setOnClickListener(v -> switchFragment(tabCFM_b));
@@ -139,6 +139,10 @@ public class MainActivity<usbIoManager> extends AppCompatActivity {
                 String temperatue = "0";
                 String humity = "0";
                 String lumity = "0";
+                String pressure = "0";
+                String fan_state = "0";
+                String amount = "0";
+                String coco = "0";
                 String light = "0";
 
                 try {
@@ -158,7 +162,7 @@ public class MainActivity<usbIoManager> extends AppCompatActivity {
 
                                         if (reportObj != null && reportObj.containsKey("properties")) {
                                             com.alibaba.fastjson.JSONObject propertiesObj = reportObj.getJSONObject("properties");
-
+                                //下面绿色的是华为云里的变量，好像是
                                             if (propertiesObj != null) {
                                                 if (propertiesObj.get("Temp") != null) {
                                                     temperatue = propertiesObj.get("Temp").toString();
@@ -168,6 +172,18 @@ public class MainActivity<usbIoManager> extends AppCompatActivity {
                                                 }
                                                 if (propertiesObj.get("Lumi") != null) {
                                                     lumity = propertiesObj.get("Lumi").toString();
+                                                }
+                                                if (propertiesObj.get("Pres") != null) {
+                                                    pressure = propertiesObj.get("Pres").toString();
+                                                }
+                                                if (propertiesObj.get("Fan") != null) {
+                                                    fan_state = propertiesObj.get("Fan").toString();
+                                                }
+                                                if (propertiesObj.get("Amount") != null) {
+                                                    amount = propertiesObj.get("Amount").toString();
+                                                }
+                                                if (propertiesObj.get("Coco") != null) {
+                                                    coco = propertiesObj.get("Coco").toString();
                                                 }
                                                 if (propertiesObj.get("Light") != null) {
                                                     light = propertiesObj.get("Light").toString();
@@ -188,13 +204,19 @@ public class MainActivity<usbIoManager> extends AppCompatActivity {
                 final String finalTemperature = temperatue;
                 final String finalHumidity = humity;
                 final String finalLumity = lumity;
+                final String finalPressure = pressure;
+                final String finalFan_state = fan_state;
+                final String finalAmount = amount;
+                final String finalCoco = coco;
                 final String finalLight = light;
 
                 runOnUiThread(() -> {
-                    if (currentFragment == tabCFM_a) {
-                        tabCFM_a.SetTheTempandHumi(finalTemperature, finalHumidity, finalLumity, client, AToken);
-                    } else if (currentFragment == tabCFM_b) {
+                    if (currentFragment == tabCFM_b) {
+                        tabCFM_a.SetTheTempandHumi(finalTemperature, finalHumidity, finalLumity,finalAmount,finalCoco,finalPressure,client, AToken);
+
+                    } else if (currentFragment == tabCFM_vedio) {
                         tabCFM_b.SetTheLightstatus(finalLight, client, AToken);
+                        tabCFM_b.SetTheFanstatus(finalFan_state, client, AToken);
                     }
                 });
             }

@@ -90,7 +90,7 @@ public class TabAFm extends Fragment {
         return viewa;
     }
 
-    public void SetTheTempandHumi(String temp, String humi,String lumi, OkHttpClient client, String AToken) {
+    public void SetTheTempandHumi(String temp, String humi,String lumi,String amount, String ccoo,String press,OkHttpClient client, String AToken) {
 
         client1=client;
         AToken1=AToken;
@@ -98,9 +98,14 @@ public class TabAFm extends Fragment {
         TextView tvTemp = viewa.findViewById(R.id.tvTemp);
         TextView tvHumi = viewa.findViewById(R.id.tvHumi);
         TextView tvLumi = viewa.findViewById(R.id.tvLumi);
+        TextView tvAmount = viewa.findViewById(R.id.tvAmount);
+        TextView tvCoco = viewa.findViewById(R.id.tvCoco);
+        TextView tvPres = viewa.findViewById(R.id.tvPres);
         tvTemp.setText(temp);
         tvHumi.setText(humi);
         tvLumi.setText(lumi);
-
+        tvAmount.setText(amount);
+        tvCoco.setText(ccoo);
+        tvPres.setText(press);
     }
 }

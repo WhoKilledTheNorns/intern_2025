@@ -92,11 +92,10 @@ public class TabBFm extends Fragment {
         return viewb;
     }
 
-
+        /*灯状态控制*/
     public void SetTheLightstatus(String lightSt, OkHttpClient client, String AToken) {
 
-        ImageView lightold = viewb.findViewById(R.id.light);//句柄，图片
-
+//        ImageView lightold = viewb.findViewById(R.id.light);//句柄，图片
 
         control = viewb.findViewById(R.id.control_d);
         control.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -139,10 +138,10 @@ public class TabBFm extends Fragment {
 
         if (msg_presh != 1) {//msg_presh 是防止文字乱变 图片更换
             if (lightSt.compareTo("OFF") == 0) {
-                lightold.setImageResource(R.drawable.light_off);
+//                lightold.setImageResource(R.drawable.light_off);
                 control.setChecked(true);
             } else {
-                lightold.setImageResource(R.drawable.light_on);
+//                lightold.setImageResource(R.drawable.light_on);
                 control.setChecked(false);
             }
         } else
@@ -151,6 +150,61 @@ public class TabBFm extends Fragment {
 
     }
 
+    /*风扇状态控制*/
+    public void SetTheFanstatus(String FanSt, OkHttpClient client, String AToken) {
+
+//        ImageView fantold = viewb.findViewById(R.id.fan);//句柄，图片
+
+        control = viewb.findViewById(R.id.control_f);
+        control.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean a) {
+
+
+                if (buttonView.isPressed()) {
+                    if (!buttonView.isChecked()) {
+                        //下发开风扇
+                        body = RequestBody.create(mediaType, "{\n" +
+                                " \"service_id\": \"SmartCockpit\",\n" +
+                                " \"command_name\": \"Fan\",\n" +
+                                " \"paras\": {\n" +
+                                "  \"Fan\": \"ON\"\n" +
+                                " }\n" +
+                                "}");
+                        msg_presh = 1;
+                        sendMessage(client,AToken,body);
+
+                    } else {
+                        //下发关风扇
+
+                        body = RequestBody.create(mediaType, "{\n" +
+                                " \"service_id\": \"SmartCockpit\",\n" +
+                                " \"command_name\": \"Fan\",\n" +
+                                " \"paras\": {\n" +
+                                "  \"Fan\": \"OFF\"\n" +
+                                " }\n" +
+                                "}");
+                        msg_presh = 1;
+                        sendMessage(client,AToken,body);
+                    }
+
+                }
+            }
+        });
+
+        if (msg_presh != 1) {//msg_presh 是防止文字乱变 图片更换
+            if (FanSt.compareTo("OFF") == 0) {
+
+                control.setChecked(true);
+            } else {
+
+                control.setChecked(false);
+            }
+        } else
+            msg_presh = 0;
+
+
+    }
 
     public void sendMessage(OkHttpClient client, String AToken, RequestBody body) {
         Request request = new Request.Builder()

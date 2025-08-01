@@ -1,67 +1,215 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/fragmentA"
+    android:id="@+id/fragmentB"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:adjustViewBounds="true"
+    android:scaleType="fitCenter"
     android:background="@drawable/bg1"
-    tools:context=".TabAFm">
+    android:orientation="horizontal"
+    tools:context=".TabBFm">
 
-    <!-- 温度：左上角 -->
-    <TextView
-        android:id="@+id/tvTemp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="温度: 0℃"
-        android:textColor="#02c2e0"
-        android:textSize="36sp"
-        android:layout_gravity="top|start"
-        android:layout_marginTop="40dp"
-        android:layout_marginStart="30dp" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="525dp"
+        android:orientation="horizontal">
 
-    <!-- 湿度：右上角 -->
-    <TextView
-        android:id="@+id/tvHumi"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="湿度: 0RH%"
-        android:textColor="#02c2e0"
-        android:textSize="36sp"
-        android:layout_gravity="top|end"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="30dp" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:orientation="vertical">
 
-    <!-- 亮度：底部中间 -->
-    <TextView
-        android:id="@+id/tvLumi"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="亮度: 0 Nits"
-        android:textColor="#02c2e0"
-        android:textSize="36sp"
-        android:layout_gravity="bottom|center_horizontal"
-        android:layout_marginBottom="50dp" />
+            <ImageView
+                android:id="@+id/light"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="Light status image" />
 
-    <!-- 距离：左下角 -->
-    <TextView
-        android:id="@+id/tvDist"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="距离: 0MM"
-        android:textColor="#02c2e0"
-        android:textSize="36sp"
-        android:layout_gravity="bottom|start"
-        android:layout_marginStart="30dp"
-        android:layout_marginBottom="50dp" />
+        </LinearLayout>
+        <!-- 第一列数据群 -->
+        <LinearLayout
+            android:id="@+id/tempGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="70mm"
+            android:layout_gravity="top|left"
+            android:layout_marginStart="37mm"
+            android:layout_marginTop="45mm"
+            android:orientation="vertical">
+            <!-- 设定温度 -->
+            <TextView
+                android:id="@+id/tvSetTemp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/msyh"
+                android:textStyle="bold"
+                android:layout_gravity="center"
+                android:text="32.5"
+                android:textColor="#FFFF0000"
+                android:textSize="24sp"
+                android:layout_marginBottom="3.5mm"/>
+            <!-- 实际温度 -->
+            <TextView
+                android:id="@+id/tvTemp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/msyh"
+                android:textStyle="bold"
+                android:layout_gravity="center"
+                android:text="0"
+                android:textColor="#FFFFFF"
+                android:textSize="24dp"
+                android:layout_marginBottom="23.5mm"/>
+            <!-- 风扇状态 -->
+            <ToggleButton
+                android:id="@+id/control_f"
+                android:layout_width="8mm"
+                android:layout_height="8mm"
+                android:layout_gravity="left|center"
+                android:layout_marginLeft="0mm"
+                android:layout_marginTop="0mm"
+                android:background="@null"
+                android:checked="true"
+                android:fontFamily="@font/msyh"
+                android:textStyle="bold"
+                android:gravity="bottom|center"
+                android:textColor="@color/toggle_text_color"
+                android:textOff="OFF"
+                android:textOn="ON"
+                android:textSize="20sp"
+                />
 
-    <!-- 仪表盘：右下角 -->
-    <com.chongqing.carinfo.TempHumView
-        android:id="@+id/TempHumDash"
-        android:layout_width="300dp"
-        android:layout_height="200dp"
-        android:layout_gravity="bottom|end"
-        android:layout_marginEnd="30dp"
-        android:layout_marginBottom="50dp" />
 
-</FrameLayout>
+        </LinearLayout>
+
+
+
+        <!-- 第二列数据群 -->
+        <LinearLayout
+            android:layout_width="8mm"
+            android:layout_height="50mm"
+            android:layout_gravity="top|left"
+            android:layout_marginStart="43mm"
+            android:layout_marginTop="50mm"
+            android:orientation="vertical">
+            <!-- 当前湿度 -->
+            <TextView
+                android:id="@+id/tvHumi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/msyh"
+                android:textStyle="bold"
+                android:layout_gravity="top|left"
+                android:layout_marginStart="0mm"
+                android:layout_marginTop="0mm"
+                android:orientation="vertical"
+                android:text="0"
+                android:textColor="#FFFFFF"
+                android:textSize="24dp" />
+
+            <!-- 计件数量 -->
+            <TextView
+                android:id="@+id/tvAmount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/msyh"
+                android:textStyle="bold"
+                android:layout_gravity="bottom|left"
+                android:layout_marginStart="0mm"
+                android:layout_marginTop="30.1mm"
+                android:orientation="vertical"
+                android:text="0"
+                android:textColor="#FFFFFF"
+                android:textSize="24dp" />
+
+        </LinearLayout>
+
+        <!-- 第三列数据群 -->
+        <LinearLayout
+        android:layout_width="8mm"
+        android:layout_height="50mm"
+        android:fontFamily="@font/msyh"
+            android:textStyle="bold"
+            android:layout_gravity="top|left"
+        android:layout_marginStart="42.5mm"
+        android:layout_marginTop="50mm"
+        android:orientation="vertical">
+        <!-- 当前亮度 -->
+        <TextView
+            android:id="@+id/tvLumi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/msyh"
+            android:textStyle="bold"
+            android:layout_gravity="top|left"
+            android:layout_marginStart="0mm"
+            android:layout_marginTop="0mm"
+            android:orientation="vertical"
+            android:text="0"
+            android:textColor="#FFFFFF"
+            android:textSize="24dp" />
+
+        <!-- 当前浓度 -->
+        <TextView
+            android:id="@+id/tvCoco"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/msyh"
+            android:textStyle="bold"
+            android:layout_gravity="bottom|left"
+            android:layout_marginStart="0mm"
+            android:layout_marginTop="30.2mm"
+            android:orientation="vertical"
+            android:text="0"
+            android:textColor="#FFFFFF"
+            android:textSize="24dp" />
+
+    </LinearLayout>
+
+        <!-- 第四列数据群 -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top|left"
+            android:layout_marginStart="41mm"
+            android:layout_marginTop="50mm"
+            android:orientation="vertical">
+            <!-- 当前压力 -->
+            <TextView
+                android:id="@+id/tvPres"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/msyh"
+                android:textStyle="bold"
+                android:orientation="vertical"
+                android:text="0"
+                android:textColor="#FFFFFF"
+                android:textSize="24dp"
+                android:layout_marginBottom="29mm"/>
+
+            <ToggleButton
+                android:id="@+id/control_d"
+                android:layout_width="8mm"
+                android:layout_height="8mm"
+                android:layout_gravity="left|center"
+                android:layout_marginLeft="0mm"
+                android:layout_marginTop="0mm"
+                android:background="@null"
+                android:checked="true"
+                android:fontFamily="@font/msyh"
+                android:textStyle="bold"
+                android:gravity="bottom|center"
+                android:textColor="@color/toggle_text_color"
+                android:textOff="OFF"
+                android:textOn="ON"
+                android:textSize="20sp"
+                />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+</LinearLayout>
