@@ -47,8 +47,9 @@ public class MainActivity<usbIoManager> extends AppCompatActivity {
     private TabBFm tabCFM_b;
     private Fragment tabCFM_vedio; // 新增视频监控的 fragment
     private Fragment currentFragment;
+    private Fragment tabCFM_curve;
 
-    private ImageButton btnTemp, btnVideo, btnExit;
+    private ImageButton btnTemp, btnVideo, btnExit, btnCurve;
 
 
     private ImageView imageView;
@@ -72,11 +73,13 @@ public class MainActivity<usbIoManager> extends AppCompatActivity {
         tabCFM_a = new TabAFm();
         tabCFM_b = new TabBFm();
         tabCFM_vedio = new TabVedioFm(); // 新增
+        tabCFM_curve = new TabCurveFm(); // 新增
 
         // 绑定按钮
         btnTemp = findViewById(R.id.btn_temp);
         btnVideo = findViewById(R.id.btn_video);
         btnExit = findViewById(R.id.btn_exit);
+        btnCurve = findViewById(R.id.btn_curve);
 
         // 默认显示温湿度页面
         switchFragment(tabCFM_vedio);
@@ -84,6 +87,7 @@ public class MainActivity<usbIoManager> extends AppCompatActivity {
         // 按钮点击事件
         btnTemp.setOnClickListener(v -> switchFragment(tabCFM_b));
         btnVideo.setOnClickListener(v -> switchFragment(tabCFM_vedio));
+        btnCurve.setOnClickListener(v -> switchFragment(tabCFM_curve)); // 新增
         btnExit.setOnClickListener(v -> finish());
 
         // 初始化 OkHttp

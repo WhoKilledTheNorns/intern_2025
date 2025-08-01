@@ -7,13 +7,14 @@
     tools:context=".MainActivity">
 
     <!-- 内容显示区域 -->
+
+    <!-- 底部导航栏 -->
     <FrameLayout
         android:id="@+id/tab_content"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1" />
 
-    <!-- 底部导航栏 -->
     <LinearLayout
         android:id="@+id/bottom_bar"
         android:layout_width="match_parent"
@@ -28,8 +29,22 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:src="@drawable/data"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"
             android:background="@null"
             android:contentDescription="温度监控" />
+
+        <ImageButton
+            android:id="@+id/btn_curve"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"
+            android:background="@null"
+            android:contentDescription="曲线"
+            android:src="@drawable/curve" />
+
 
         <ImageButton
             android:id="@+id/btn_video"
@@ -37,6 +52,8 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:src="@drawable/cam"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"
             android:background="@null"
             android:contentDescription="视频监控" />
 
@@ -46,7 +63,10 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:src="@drawable/exit"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"
             android:background="@null"
             android:contentDescription="退出登录" />
+
     </LinearLayout>
 </LinearLayout>

@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragmentCurve"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg3"
+    tools:context=".TabAFm">
+
+    <!-- 横向滚动区域 -->
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none">
+
+        <!-- 横向线性布局，放置4个折线图 -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center_vertical">
+            <!-- 温度折线图 -->
+            <com.github.mikephil.charting.charts.LineChart
+                android:id="@+id/chart_temperature"
+                android:layout_width="240dp"
+                android:layout_height="200dp"
+                android:layout_margin="16dp"
+                android:background="#FFFFFF" />
+
+            <ImageView
+                android:id="@+id/img_temperature"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:contentDescription="温度图标"
+                android:src="@drawable/temp_icon" />
+        </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:orientation="vertical">
+                <!-- 湿度折线图 -->
+                <com.github.mikephil.charting.charts.LineChart
+                    android:id="@+id/chart_humidity"
+                    android:layout_width="240dp"
+                    android:layout_height="200dp"
+                    android:layout_margin="16dp"
+                    android:background="#FFFFFF" />
+
+                <ImageView
+                    android:id="@+id/img_humidity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:contentDescription="湿度图标"
+                    android:src="@drawable/humi_icon" />
+            </LinearLayout>
+
+            <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center_vertical">
+            <!-- 压力折线图 -->
+            <com.github.mikephil.charting.charts.LineChart
+                android:id="@+id/chart_pressure"
+                android:layout_width="240dp"
+                android:layout_height="200dp"
+                android:layout_margin="16dp"
+                android:background="#FFFFFF" />
+            <ImageView
+                android:id="@+id/img_press"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/press_icon"
+                android:contentDescription="压力图标"
+                android:layout_marginBottom="8dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center_vertical">
+            <!-- 亮度折线图 -->
+            <com.github.mikephil.charting.charts.LineChart
+                android:id="@+id/chart_light"
+                android:layout_width="240dp"
+                android:layout_height="200dp"
+                android:layout_margin="16dp"
+                android:background="#FFFFFF" />
+            <ImageView
+                android:id="@+id/img_lumi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/lumi_icon"
+                android:contentDescription="亮度图标"
+                android:layout_marginBottom="8dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center_vertical">
+            <!-- CO2折线图 -->
+            <com.github.mikephil.charting.charts.LineChart
+                android:id="@+id/chart_CO2"
+                android:layout_width="240dp"
+                android:layout_height="200dp"
+                android:layout_margin="16dp"
+                android:background="#FFFFFF" />
+            <ImageView
+                android:id="@+id/img_co2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/co2_icon"
+                android:contentDescription="亮度图标"
+                android:layout_marginBottom="8dp" />
+        </LinearLayout>
+
+        </LinearLayout>
+    </HorizontalScrollView>
+
+    <!-- 固定悬浮计数条 -->
+    <LinearLayout
+        android:id="@+id/count_bar"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginBottom="0dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:background="#66000000">
+        <ImageView
+            android:id="@+id/img_count_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/count_icon"
+            android:contentDescription="计数图标"
+            android:layout_marginLeft="0dp" />
+        <TextView
+            android:id="@+id/tv_count"
+            android:layout_width="280dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="0"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:fontFamily="@font/msyh"
+            android:textColor="#FFF7d6" />
+
+
+    </LinearLayout>
+</FrameLayout>
+
