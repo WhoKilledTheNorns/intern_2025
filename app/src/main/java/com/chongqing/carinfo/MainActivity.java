@@ -98,7 +98,29 @@ public class MainActivity<usbIoManager> extends AppCompatActivity {
 
         // 认证请求
         MediaType mediaType = MediaType.parse("application/x-www-form-urlencoded");
-        RequestBody body = RequestBody.create(mediaType, "{ ...你的 JSON 请求体... }");
+        RequestBody body = RequestBody.create(mediaType, "{ \n" +
+                "    \"auth\": { \n" +
+                "        \"identity\": { \n" +
+                "            \"methods\": [ \n" +
+                "                \"password\" \n" +
+                "            ], \n" +
+                "            \"password\": { \n" +
+                "                \"user\": { \n" +
+                "                    \"name\": \"cekong2022\", \n" +
+                "                    \"password\": \"qq3416702178\", \n" +
+                "                    \"domain\": { \n" +
+                "                        \"name\": \"GT-weixin_74440944\" \n" +
+                "                    } \n" +
+                "                } \n" +
+                "            } \n" +
+                "        }, \n" +
+                "        \"scope\": { \n" +
+                "            \"project\": { \n" +
+                "                \"name\": \"cn-north-4\" \n" +
+                "            } \n" +
+                "        } \n" +
+                "    } \n" +
+                "}");
 
         Request request = new Request.Builder()
                 .url("https://4c19e048b3.st1.iotda-app.cn-north-4.myhuaweicloud.com:443/v5/iot/9b0cd9d943cd4689b67d2563fdee15b7/products")
@@ -118,6 +140,8 @@ public class MainActivity<usbIoManager> extends AppCompatActivity {
 
                 if (AToken == null || AToken.isEmpty()) {
                     Log.e(TAG, "未获取到 X-Subject-Token，终止数据轮询");
+                    Log.d(TAG, "响应状态码: " + response.code());
+                    Log.d(TAG, "响应头部内容:\n" + response.headers().toString());
                     return; // 防止崩溃
                 }
 
@@ -151,7 +175,7 @@ public class MainActivity<usbIoManager> extends AppCompatActivity {
         }
 
         Request request = new Request.Builder()
-                .url("https://4c19e048b3.st1.iotda-app.cn-north-4.myhuaweicloud.com:443/v5/iot/9b0cd9d943cd4689b67d2563fdee15b7/products")
+                .url("https://d75ff9379a.st1.iotda-app.cn-north-4.myhuaweicloud.com:443/v5/iot/ba12250a69f543479841481557c1e554/devices/6886e669d582f200183fdcc5_smartcontrol/shadow")
                 .method("GET", null)
                 .addHeader("Content-Type", "application/json")
                 .addHeader("X-Auth-Token", AToken)
@@ -170,7 +194,8 @@ public class MainActivity<usbIoManager> extends AppCompatActivity {
                 String lumity = "0";
                 String pressure = "0";
                 String fan_state = "0";
-                String amount = "0";
+                String gamount = "0";
+                String bamount = "0";
                 String coco = "0";
                 String light = "0";
 
@@ -208,8 +233,11 @@ public class MainActivity<usbIoManager> extends AppCompatActivity {
                                                 if (propertiesObj.get("Fan") != null) {
                                                     fan_state = propertiesObj.get("Fan").toString();
                                                 }
-                                                if (propertiesObj.get("Amount") != null) {
-                                                    amount = propertiesObj.get("Amount").toString();
+                                                if (propertiesObj.get("GAm") != null) {
+                                                    gamount = propertiesObj.get("GAm").toString();
+                                                }
+                                                if (propertiesObj.get("BAm") != null) {
+                                                    bamount = propertiesObj.get("BAm").toString();
                                                 }
                                                 if (propertiesObj.get("Coco") != null) {
                                                     coco = propertiesObj.get("Coco").toString();
@@ -235,17 +263,20 @@ public class MainActivity<usbIoManager> extends AppCompatActivity {
                 final String finalLumity = lumity;
                 final String finalPressure = pressure;
                 final String finalFan_state = fan_state;
-                final String finalAmount = amount;
+                final String finalgoodAmount = gamount;
+                final String finalbadAmount = bamount;
                 final String finalCoco = coco;
                 final String finalLight = light;
 
                 runOnUiThread(() -> {
                     if (currentFragment == tabCFM_b) {
-                        tabCFM_a.SetTheTempandHumi(finalTemperature, finalHumidity, finalLumity,finalAmount,finalCoco,
+                        tabCFM_b.SetTheData(finalTemperature, finalHumidity, finalLumity,finalgoodAmount,finalbadAmount,finalCoco,
                                 finalPressure,finalFan_state,finalLight,client, AToken);
 
-                    } else if (currentFragment == tabCFM_vedio) {
+                    } else if (currentFragment == tabCFM_curve) {
                         //灯和风扇控制函数
+                        tabCFM_b.SetTheData(finalTemperature, finalHumidity, finalLumity,finalgoodAmount,finalbadAmount,finalCoco,
+                                finalPressure,finalFan_state,finalLight,client, AToken);
                         tabCFM_b.SetTheLightstatus(finalLight, client, AToken);
                         tabCFM_b.SetTheFanstatus(finalFan_state, client, AToken);
                     }

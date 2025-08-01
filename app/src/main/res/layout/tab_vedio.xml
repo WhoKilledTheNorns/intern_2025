@@ -18,8 +18,8 @@
         android:textSize="20sp"
         android:textStyle="bold"
         android:layout_gravity="bottom|end"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp" />
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="24dp" />
 
     <!-- 数据长度 -->
 
@@ -31,12 +31,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="170dp"
+        android:layout_marginEnd="200dp"
+        android:layout_marginBottom="16dp"
         android:padding="8dp"
         android:text="当前帧率: -- FPS"
         android:textColor="#FFF7D6"
-        android:textSize="22sp"
+        android:textSize="20sp"
         android:textStyle="bold" />
 
 
@@ -45,7 +45,7 @@
         android:id="@+id/chart"
         android:layout_width="300dp"
         android:layout_height="300dp"
-        android:background="#FFFFFF"
+        android:background="#FFF7D6"
         android:layout_gravity="top|end"
         android:layout_marginTop="100dp"
         android:layout_marginEnd="60dp" />

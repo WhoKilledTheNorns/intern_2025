@@ -149,16 +149,61 @@
             android:src="@drawable/count_icon"
             android:contentDescription="计数图标"
             android:layout_marginLeft="0dp" />
-        <TextView
-            android:id="@+id/tv_count"
+        <LinearLayout
             android:layout_width="280dp"
             android:layout_height="match_parent"
+            android:orientation="horizontal"
             android:gravity="center"
-            android:text="0"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:fontFamily="@font/msyh"
-            android:textColor="#FFF7d6" />
+            android:layout_gravity="center"
+            android:weightSum="2">
+
+            <!-- 合格数 -->
+            <TextView
+                android:layout_width="17mm"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:gravity="center_vertical"
+                android:text="合格数："
+                android:textSize="20sp"
+                android:fontFamily="@font/msyh"
+                android:textStyle="italic|bold"
+                android:textColor="#FFF7D6" />
+
+            <TextView
+                android:id="@+id/tvGoodAmount"
+                android:layout_width="5mm"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:text="0"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/msyh"
+                android:textColor="#FF00FF00"
+                android:layout_marginRight="3mm"/> <!-- 绿色 -->
+
+            <!-- 不合格数 -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:gravity="center_vertical"
+                android:text="不合格数："
+                android:textSize="20sp"
+                android:fontFamily="@font/msyh"
+                android:textStyle="italic|bold"
+                android:textColor="#FFF7D6" />
+
+            <TextView
+                android:id="@+id/tvBadAmount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:text="0"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/msyh"
+                android:textColor="#FFFF0000" /> <!-- 红色 -->
+        </LinearLayout>
 
 
     </LinearLayout>

@@ -227,4 +227,29 @@ public class TabBFm extends Fragment {
 
 
     }
+    public void SetTheData(String temp, String humi,String lumi,String goodamount,String badamount, String ccoo,String press,String fengshan,String dengdeng,OkHttpClient client, String AToken) {
+
+        client1=client;
+        AToken1=AToken;
+
+        TextView tvTemp = viewb.findViewById(R.id.tvTemp);
+        TextView tvHumi = viewb.findViewById(R.id.tvHumi);
+        TextView tvLumi = viewb.findViewById(R.id.tvLumi);
+        TextView tvGoodAmount = viewb.findViewById(R.id.tvGoodAmount);
+        TextView tvBadAmount = viewb.findViewById(R.id.tvBadAmount);
+        TextView tvCoco = viewb.findViewById(R.id.tvCoco);
+        TextView tvPres = viewb.findViewById(R.id.tvPres);
+        TextView tvFanfan = viewb.findViewById(R.id.tvFanfan);
+        TextView tvDengdeng = viewb.findViewById(R.id.tvDengdeng);
+
+        tvTemp.setText(temp);
+        tvHumi.setText(humi);
+        tvLumi.setText(lumi);
+        tvGoodAmount.setText(goodamount);
+        tvBadAmount.setText(badamount);
+        tvCoco.setText(ccoo);
+        tvPres.setText(press);
+        tvFanfan.setText(fengshan);
+        tvDengdeng.setText(dengdeng);
+    }
 }

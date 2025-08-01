@@ -31,7 +31,6 @@
         </LinearLayout>
         <!-- 第一列数据群 -->
         <LinearLayout
-            android:id="@+id/tempGroup"
             android:layout_width="wrap_content"
             android:layout_height="70mm"
             android:layout_gravity="top|left"
@@ -123,21 +122,32 @@
                 android:textColor="#FFFFFF"
                 android:textSize="24dp" />
 
-            <!-- 计件数量 -->
+            <!-- 合格数 -->
             <TextView
-                android:id="@+id/tvAmount"
+                android:id="@+id/tvGoodAmount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/msyh"
                 android:textStyle="bold"
                 android:layout_gravity="bottom|left"
                 android:layout_marginStart="0mm"
-                android:layout_marginTop="30.1mm"
+                android:layout_marginTop="26mm"
                 android:orientation="vertical"
                 android:text="0"
-                android:textColor="#FFFFFF"
-                android:textSize="24dp" />
-
+                android:textColor="#FF00FF00"
+                android:textSize="24dp"
+                android:layout_marginBottom="2.7mm"/>
+            <!-- 不合格数 -->
+            <TextView
+                android:id="@+id/tvBadAmount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/msyh"
+                android:textStyle="bold"
+                android:layout_gravity="bottom|left"
+                android:text="0"
+                android:textColor="#FFFF0000"
+                android:textSize="24dp"/>
         </LinearLayout>
 
         <!-- 第三列数据群 -->
