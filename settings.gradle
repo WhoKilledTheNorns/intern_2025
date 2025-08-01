@@ -1,3 +1,16 @@
+pluginManagement {
+    repositories {
+        google()
+        mavenCentral()
+        maven { url 'https://jitpack.io' }
+        gradlePluginPortal()
+    }
+}
+
 rootProject.name = "carInfo"
 include ':app'
 include ':usbSerialForAndroid'
+
+
+rootProject.name = "carInfo"
+include ':app'

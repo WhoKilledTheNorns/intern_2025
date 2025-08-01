@@ -23,6 +23,20 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
+
+
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.Bundle;
+import android.widget.ImageView;
+import androidx.appcompat.app.AppCompatActivity;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.Socket;
+import java.util.Arrays;
+
+
 public class MainActivity<usbIoManager> extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
@@ -35,6 +49,17 @@ public class MainActivity<usbIoManager> extends AppCompatActivity {
     private Fragment currentFragment;
 
     private ImageButton btnTemp, btnVideo, btnExit;
+
+
+    private ImageView imageView;
+    private Thread clientThread;
+
+    // 直接写死 IP 和端口
+    private static final String ip = "192.68.43.148";
+    private static final String port = "8080";
+
+    private volatile boolean running = false;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

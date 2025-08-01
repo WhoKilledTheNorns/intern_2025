@@ -8,6 +8,58 @@
     android:background="@drawable/bg2"
     tools:context=".TabAFm">
 
-    <!-- 温度：左上角 -->
+    <!-- 当前时间 -->
+    <TextView
+        android:id="@+id/tv_current_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="时间: --:--:--"
+        android:textColor="#FFF7D6"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_gravity="bottom|end"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp" />
+
+    <!-- 数据长度 -->
+
+
+
+    <!-- 帧率显示 -->
+    <TextView
+        android:id="@+id/tv_fps"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="170dp"
+        android:padding="8dp"
+        android:text="当前帧率: -- FPS"
+        android:textColor="#FFF7D6"
+        android:textSize="22sp"
+        android:textStyle="bold" />
+
+
+    <!-- 折线图（显示帧率变化） -->
+    <com.github.mikephil.charting.charts.LineChart
+        android:id="@+id/chart"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:background="#FFFFFF"
+        android:layout_gravity="top|end"
+        android:layout_marginTop="100dp"
+        android:layout_marginEnd="60dp" />
+
+
+
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="500dp"
+        android:layout_height="400dp"
+        android:layout_gravity="top|end"
+        android:layout_marginTop="100dp"
+        android:layout_marginEnd="400dp"
+        android:scaleType="centerCrop" />
 
 </FrameLayout>
