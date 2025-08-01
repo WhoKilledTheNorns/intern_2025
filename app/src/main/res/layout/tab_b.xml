@@ -62,7 +62,22 @@
                 android:textColor="#FFFFFF"
                 android:textSize="24dp"
                 android:layout_marginBottom="23.5mm"/>
-            <!-- 风扇状态 -->
+            <!-- 风扇状态（由按钮改为文本显示） -->
+            <TextView
+                android:id="@+id/tvFanfan"
+                android:layout_width="8mm"
+                android:layout_height="8mm"
+                android:layout_gravity="left|center"
+                android:layout_marginLeft="0mm"
+                android:layout_marginTop="0mm"
+                android:background="@null"
+                android:fontFamily="@font/msyh"
+                android:textStyle="bold"
+                android:gravity="bottom|center"
+                android:textColor="@color/toggle_text_color"
+                android:text="OFF"
+            android:textSize="20sp" />
+<!--            &lt;!&ndash; 风扇状态 &ndash;&gt;
             <ToggleButton
                 android:id="@+id/control_f"
                 android:layout_width="8mm"
@@ -79,8 +94,7 @@
                 android:textOff="OFF"
                 android:textOn="ON"
                 android:textSize="20sp"
-                />
-
+                />-->
 
         </LinearLayout>
 
@@ -190,7 +204,23 @@
                 android:textSize="24dp"
                 android:layout_marginBottom="29mm"/>
 
-            <ToggleButton
+            <!-- 灯光状态（由按钮改为文本显示） -->
+            <TextView
+                android:id="@+id/tvDengdeng"
+                android:layout_width="8mm"
+                android:layout_height="8mm"
+                android:layout_gravity="left|center"
+                android:layout_marginLeft="0mm"
+                android:layout_marginTop="0mm"
+                android:background="@null"
+                android:fontFamily="@font/msyh"
+                android:textStyle="bold"
+                android:gravity="bottom|center"
+                android:textColor="@color/toggle_text_color"
+                android:text="OFF"
+            android:textSize="20sp" />
+
+<!--            <ToggleButton
                 android:id="@+id/control_d"
                 android:layout_width="8mm"
                 android:layout_height="8mm"
@@ -206,7 +236,7 @@
                 android:textOff="OFF"
                 android:textOn="ON"
                 android:textSize="20sp"
-                />
+                />-->
 
         </LinearLayout>
 

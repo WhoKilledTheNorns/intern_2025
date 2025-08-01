@@ -212,9 +212,11 @@ public class MainActivity<usbIoManager> extends AppCompatActivity {
 
                 runOnUiThread(() -> {
                     if (currentFragment == tabCFM_b) {
-                        tabCFM_a.SetTheTempandHumi(finalTemperature, finalHumidity, finalLumity,finalAmount,finalCoco,finalPressure,client, AToken);
+                        tabCFM_a.SetTheTempandHumi(finalTemperature, finalHumidity, finalLumity,finalAmount,finalCoco,
+                                finalPressure,finalFan_state,finalLight,client, AToken);
 
                     } else if (currentFragment == tabCFM_vedio) {
+                        //灯和风扇控制函数
                         tabCFM_b.SetTheLightstatus(finalLight, client, AToken);
                         tabCFM_b.SetTheFanstatus(finalFan_state, client, AToken);
                     }
