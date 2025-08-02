@@ -295,7 +295,7 @@ public class MainActivity<usbIoManager> extends AppCompatActivity {
                     }
                     else if (currentFragment == tabCFM_curve)
                             {
-                                tabCFM_curve.updateAllCurves(finalTemperature, finalHumidity, finalPressure, finalLight, finalCoco);
+                                tabCFM_curve.updateAllCurves(finalTemperature, finalHumidity, finalPressure, finalLumity, finalCoco);
                                 //灯和风扇控制函数
                                 tabCFM_b.SetTheData(finalTemperature, finalHumidity, finalLumity,finalgoodAmount,finalbadAmount,finalCoco,
                                     finalPressure,finalFan_state,finalLight,client, AToken);
