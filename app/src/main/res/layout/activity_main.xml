@@ -45,6 +45,17 @@
             android:contentDescription="曲线"
             android:src="@drawable/curve" />
 
+        <!-- 新增控制按钮 -->
+        <ImageButton
+            android:id="@+id/btn_control"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@drawable/control"
+        android:adjustViewBounds="true"
+        android:scaleType="fitXY"
+        android:background="@null"
+        android:contentDescription="控制" />
 
         <ImageButton
             android:id="@+id/btn_video"

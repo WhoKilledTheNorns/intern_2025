@@ -42,14 +42,16 @@ public class MainActivity<usbIoManager> extends AppCompatActivity {
     private static final String TAG = "MainActivity";
     private OkHttpClient client;
     private String AToken;
+    private TabCurveFm tabCFM_curve; // 从Fragment改到了方法
 
     private TabAFm tabCFM_a;
     private TabBFm tabCFM_b;
+    private TabControlFm tab_cfm_control; // 改成具体的 Fragment 类型
     private Fragment tabCFM_vedio; // 新增视频监控的 fragment
     private Fragment currentFragment;
-    private Fragment tabCFM_curve;
 
-    private ImageButton btnTemp, btnVideo, btnExit, btnCurve;
+
+    private ImageButton btnTemp, btnVideo, btnExit, btnCurve, btnControl;
 
 
     private ImageView imageView;
@@ -74,12 +76,14 @@ public class MainActivity<usbIoManager> extends AppCompatActivity {
         tabCFM_b = new TabBFm();
         tabCFM_vedio = new TabVedioFm(); // 新增
         tabCFM_curve = new TabCurveFm(); // 新增
+        tab_cfm_control = new TabControlFm();
 
         // 绑定按钮
         btnTemp = findViewById(R.id.btn_temp);
         btnVideo = findViewById(R.id.btn_video);
         btnExit = findViewById(R.id.btn_exit);
         btnCurve = findViewById(R.id.btn_curve);
+        btnControl = findViewById(R.id.btn_control);
 
         // 默认显示温湿度页面
         switchFragment(tabCFM_b);
@@ -88,6 +92,7 @@ public class MainActivity<usbIoManager> extends AppCompatActivity {
         btnTemp.setOnClickListener(v -> switchFragment(tabCFM_b));
         btnVideo.setOnClickListener(v -> switchFragment(tabCFM_vedio));
         btnCurve.setOnClickListener(v -> switchFragment(tabCFM_curve)); // 新增
+        btnControl.setOnClickListener(v -> switchFragment(tab_cfm_control)); // 新增
         btnExit.setOnClickListener(v -> finish());
 
         // 初始化 OkHttp
@@ -95,6 +100,8 @@ public class MainActivity<usbIoManager> extends AppCompatActivity {
                 .connectTimeout(10, TimeUnit.SECONDS)
                 .readTimeout(60, TimeUnit.SECONDS)
                 .build();
+
+
 
         // 认证请求
         MediaType mediaType = MediaType.parse("application/x-www-form-urlencoded");
@@ -280,22 +287,30 @@ public class MainActivity<usbIoManager> extends AppCompatActivity {
                 final String finalconc = conc;
 
                 runOnUiThread(() -> {
-                    if (currentFragment == tabCFM_b) {
+                    if (currentFragment == tabCFM_b)
+                    {
                         tabCFM_b.SetTheData(finalTemperature, finalHumidity, finalLumity,finalgoodAmount,finalbadAmount,finalCoco,
                                 finalPressure,finalFan_state,finalLight,client, AToken);
 
-                    } else if (currentFragment == tabCFM_curve) {
-                        //灯和风扇控制函数
-                        tabCFM_b.SetTheData(finalTemperature, finalHumidity, finalLumity,finalgoodAmount,finalbadAmount,finalCoco,
-                                finalPressure,finalFan_state,finalLight,client, AToken);
-/*                        tabCFM_b.SetTheLightstatus(finalLight, client, AToken);
-                        tabCFM_b.SetTheFanstatus(finalFan_state, client, AToken);*/
                     }
-                    else if (currentFragment == tabCFM_control) {
+                    else if (currentFragment == tabCFM_curve)
+                            {
+                                tabCFM_curve.updateAllCurves(finalTemperature, finalHumidity, finalPressure, finalLight, finalCoco);
+                                //灯和风扇控制函数
+                                tabCFM_b.SetTheData(finalTemperature, finalHumidity, finalLumity,finalgoodAmount,finalbadAmount,finalCoco,
+                                    finalPressure,finalFan_state,finalLight,client, AToken);
+
+                                /*tabCFM_b.SetTheLightstatus(finalLight, client, AToken);
+                                tabCFM_b.SetTheFanstatus(finalFan_state, client, AToken);*/
+                            }
+
+
+                    else if (currentFragment == tab_cfm_control)
+                    {
                         //灯和风扇控制函数
-                        tabCFM_b.SetControlData(finalangle, finalconc, client, AToken);
+                        tab_cfm_control.controlAll(finalangle, finalconc, client, AToken);
 /*                        tabCFM_b.SetTheLightstatus(finalLight, client, AToken);
-                        tabCFM_b.SetTheFanstatus(finalFan_state, client, AToken);*/
+                        tabCFM_control.SetTheFanstatus(finalFan_state, client, AToken);*/
                     }
                 });
             }
