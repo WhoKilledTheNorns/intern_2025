@@ -198,6 +198,8 @@ public class MainActivity<usbIoManager> extends AppCompatActivity {
                 String bamount = "0";
                 String coco = "0";
                 String light = "0";
+                String angle = "0";
+                String conc = "0";
 
                 try {
                     if (response.body() != null) {
@@ -245,6 +247,13 @@ public class MainActivity<usbIoManager> extends AppCompatActivity {
                                                 if (propertiesObj.get("Deng") != null) {
                                                     light = propertiesObj.get("Deng").toString();
                                                 }
+                                                if (propertiesObj.get("Angle") != null) {
+                                                    angle = propertiesObj.get("Angle").toString();
+                                                }
+                                                if (propertiesObj.get("Conc") != null) {
+                                                    conc = propertiesObj.get("Conc").toString();
+                                                }
+
                                             }
                                         }
                                     }
@@ -267,6 +276,8 @@ public class MainActivity<usbIoManager> extends AppCompatActivity {
                 final String finalbadAmount = bamount;
                 final String finalCoco = coco;
                 final String finalLight = light;
+                final String finalangle = angle;
+                final String finalconc = conc;
 
                 runOnUiThread(() -> {
                     if (currentFragment == tabCFM_b) {
@@ -277,6 +288,12 @@ public class MainActivity<usbIoManager> extends AppCompatActivity {
                         //灯和风扇控制函数
                         tabCFM_b.SetTheData(finalTemperature, finalHumidity, finalLumity,finalgoodAmount,finalbadAmount,finalCoco,
                                 finalPressure,finalFan_state,finalLight,client, AToken);
+/*                        tabCFM_b.SetTheLightstatus(finalLight, client, AToken);
+                        tabCFM_b.SetTheFanstatus(finalFan_state, client, AToken);*/
+                    }
+                    else if (currentFragment == tabCFM_control) {
+                        //灯和风扇控制函数
+                        tabCFM_b.SetControlData(finalangle, finalconc, client, AToken);
 /*                        tabCFM_b.SetTheLightstatus(finalLight, client, AToken);
                         tabCFM_b.SetTheFanstatus(finalFan_state, client, AToken);*/
                     }
