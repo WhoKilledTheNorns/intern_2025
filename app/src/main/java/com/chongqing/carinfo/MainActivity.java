@@ -82,7 +82,7 @@ public class MainActivity<usbIoManager> extends AppCompatActivity {
         btnCurve = findViewById(R.id.btn_curve);
 
         // 默认显示温湿度页面
-        switchFragment(tabCFM_vedio);
+        switchFragment(tabCFM_b);
 
         // 按钮点击事件
         btnTemp.setOnClickListener(v -> switchFragment(tabCFM_b));
@@ -109,7 +109,7 @@ public class MainActivity<usbIoManager> extends AppCompatActivity {
                 "                    \"name\": \"cekong2022\", \n" +
                 "                    \"password\": \"qq3416702178\", \n" +
                 "                    \"domain\": { \n" +
-                "                        \"name\": \"GT-weixin_74440944\" \n" +
+                "                        \"name\": \"yangjl_neu\" \n" +
                 "                    } \n" +
                 "                } \n" +
                 "            } \n" +
@@ -123,7 +123,7 @@ public class MainActivity<usbIoManager> extends AppCompatActivity {
                 "}");
 
         Request request = new Request.Builder()
-                .url("https://4c19e048b3.st1.iotda-app.cn-north-4.myhuaweicloud.com:443/v5/iot/9b0cd9d943cd4689b67d2563fdee15b7/products")
+                .url("https://iam.cn-north-4.myhuaweicloud.com/v3/auth/tokens")
                 .method("POST", body)
                 .addHeader("Content-Type", "application/x-www-form-urlencoded")
                 .build();
@@ -216,7 +216,7 @@ public class MainActivity<usbIoManager> extends AppCompatActivity {
 
                                         if (reportObj != null && reportObj.containsKey("properties")) {
                                             com.alibaba.fastjson.JSONObject propertiesObj = reportObj.getJSONObject("properties");
-                                //下面绿色的是华为云里的变量，好像是
+                                            //下面绿色的是华为云里的变量，好像是
                                             if (propertiesObj != null) {
                                                 if (propertiesObj.get("Temp") != null) {
                                                     temperatue = propertiesObj.get("Temp").toString();
@@ -242,8 +242,8 @@ public class MainActivity<usbIoManager> extends AppCompatActivity {
                                                 if (propertiesObj.get("Coco") != null) {
                                                     coco = propertiesObj.get("Coco").toString();
                                                 }
-                                                if (propertiesObj.get("Light") != null) {
-                                                    light = propertiesObj.get("Light").toString();
+                                                if (propertiesObj.get("Deng") != null) {
+                                                    light = propertiesObj.get("Deng").toString();
                                                 }
                                             }
                                         }
@@ -277,8 +277,8 @@ public class MainActivity<usbIoManager> extends AppCompatActivity {
                         //灯和风扇控制函数
                         tabCFM_b.SetTheData(finalTemperature, finalHumidity, finalLumity,finalgoodAmount,finalbadAmount,finalCoco,
                                 finalPressure,finalFan_state,finalLight,client, AToken);
-                        tabCFM_b.SetTheLightstatus(finalLight, client, AToken);
-                        tabCFM_b.SetTheFanstatus(finalFan_state, client, AToken);
+/*                        tabCFM_b.SetTheLightstatus(finalLight, client, AToken);
+                        tabCFM_b.SetTheFanstatus(finalFan_state, client, AToken);*/
                     }
                 });
             }

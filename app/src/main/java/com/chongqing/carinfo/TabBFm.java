@@ -92,7 +92,7 @@ public class TabBFm extends Fragment {
         return viewb;
     }
 
-        /*灯状态控制*/
+    /*灯状态控制*/
     public void SetTheLightstatus(String lightSt, OkHttpClient client, String AToken) {
 
 //        ImageView lightold = viewb.findViewById(R.id.light);//句柄，图片
@@ -166,7 +166,7 @@ public class TabBFm extends Fragment {
                         //下发开风扇
                         body = RequestBody.create(mediaType, "{\n" +
                                 " \"service_id\": \"SmartCockpit\",\n" +
-                                " \"command_name\": \"Fan\",\n" +
+                                " \"command_name\": \"Light\",\n" +
                                 " \"paras\": {\n" +
                                 "  \"Fan\": \"ON\"\n" +
                                 " }\n" +
@@ -179,7 +179,7 @@ public class TabBFm extends Fragment {
 
                         body = RequestBody.create(mediaType, "{\n" +
                                 " \"service_id\": \"SmartCockpit\",\n" +
-                                " \"command_name\": \"Fan\",\n" +
+                                " \"command_name\": \"Light\",\n" +
                                 " \"paras\": {\n" +
                                 "  \"Fan\": \"OFF\"\n" +
                                 " }\n" +
@@ -208,7 +208,7 @@ public class TabBFm extends Fragment {
 
     public void sendMessage(OkHttpClient client, String AToken, RequestBody body) {
         Request request = new Request.Builder()
-                .url("https://5b0d2d88ef.st1.iotda-app.cn-north-4.myhuaweicloud.com:443/v5/iot/bd212c4e68bb42e59dbe9d772e356d8f/devices/674fb735ef99673c8ad24058_SmtHMI/commands")
+                .url("https://d75ff9379a.st1.iotda-app.cn-north-4.myhuaweicloud.com:443/v5/iot/ba12250a69f543479841481557c1e554/devices/6886e669d582f200183fdcc5_smartcontrol/commands")
                 .method("POST", body)
                 .addHeader("X-Auth-Token", AToken)
                 .addHeader("Content-Type", "application/json")

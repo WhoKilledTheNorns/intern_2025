@@ -22,17 +22,17 @@
             android:layout_weight="0"
             android:orientation="vertical">
 
-            <ImageView
-                android:id="@+id/light"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:contentDescription="Light status image" />
+            <!--            <ImageView
+                            android:id="@+id/light"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:contentDescription="Light status image" />-->
 
         </LinearLayout>
         <!-- 第一列数据群 -->
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="70mm"
+            android:layout_width="12mm"
+            android:layout_height="50mm"
             android:layout_gravity="top|left"
             android:layout_marginStart="37mm"
             android:layout_marginTop="45mm"
@@ -60,40 +60,39 @@
                 android:text="0"
                 android:textColor="#FFFFFF"
                 android:textSize="24dp"
-                android:layout_marginBottom="23.5mm"/>
+                android:layout_marginBottom="25.1mm"/>
             <!-- 风扇状态（由按钮改为文本显示） -->
             <TextView
                 android:id="@+id/tvFanfan"
                 android:layout_width="8mm"
                 android:layout_height="8mm"
-                android:layout_gravity="left|center"
+                android:layout_gravity="center"
                 android:layout_marginLeft="0mm"
                 android:layout_marginTop="0mm"
                 android:background="@null"
                 android:fontFamily="@font/msyh"
                 android:textStyle="bold"
-                android:gravity="bottom|center"
                 android:textColor="@color/toggle_text_color"
                 android:text="OFF"
-            android:textSize="20sp" />
-<!--            &lt;!&ndash; 风扇状态 &ndash;&gt;
-            <ToggleButton
-                android:id="@+id/control_f"
-                android:layout_width="8mm"
-                android:layout_height="8mm"
-                android:layout_gravity="left|center"
-                android:layout_marginLeft="0mm"
-                android:layout_marginTop="0mm"
-                android:background="@null"
-                android:checked="true"
-                android:fontFamily="@font/msyh"
-                android:textStyle="bold"
-                android:gravity="bottom|center"
-                android:textColor="@color/toggle_text_color"
-                android:textOff="OFF"
-                android:textOn="ON"
-                android:textSize="20sp"
-                />-->
+                android:textSize="20sp" />
+            <!--            &lt;!&ndash; 风扇状态 &ndash;&gt;
+                        <ToggleButton
+                            android:id="@+id/control_f"
+                            android:layout_width="8mm"
+                            android:layout_height="8mm"
+                            android:layout_gravity="left|center"
+                            android:layout_marginLeft="0mm"
+                            android:layout_marginTop="0mm"
+                            android:background="@null"
+                            android:checked="true"
+                            android:fontFamily="@font/msyh"
+                            android:textStyle="bold"
+                            android:gravity="bottom|center"
+                            android:textColor="@color/toggle_text_color"
+                            android:textOff="OFF"
+                            android:textOn="ON"
+                            android:textSize="20sp"
+                            />-->
 
         </LinearLayout>
 
@@ -101,10 +100,10 @@
 
         <!-- 第二列数据群 -->
         <LinearLayout
-            android:layout_width="8mm"
+            android:layout_width="12mm"
             android:layout_height="50mm"
             android:layout_gravity="top|left"
-            android:layout_marginStart="43mm"
+            android:layout_marginStart="39.5mm"
             android:layout_marginTop="50mm"
             android:orientation="vertical">
             <!-- 当前湿度 -->
@@ -152,12 +151,12 @@
 
         <!-- 第三列数据群 -->
         <LinearLayout
-            android:layout_width="8mm"
+            android:layout_width="12mm"
             android:layout_height="50mm"
             android:fontFamily="@font/msyh"
             android:textStyle="bold"
             android:layout_gravity="top|left"
-            android:layout_marginStart="42.5mm"
+            android:layout_marginStart="38mm"
             android:layout_marginTop="50mm"
             android:orientation="vertical">
             <!-- 当前亮度 -->
@@ -197,7 +196,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="top|left"
-            android:layout_marginStart="41mm"
+            android:layout_marginStart="39mm"
             android:layout_marginTop="50mm"
             android:orientation="vertical">
             <!-- 当前压力 -->
@@ -205,14 +204,14 @@
                 android:id="@+id/tvPres"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
+                android:layout_gravity="left|center"
                 android:fontFamily="@font/msyh"
                 android:textStyle="bold"
                 android:orientation="vertical"
                 android:text="0"
                 android:textColor="#FFFFFF"
                 android:textSize="24dp"
-                android:layout_marginBottom="29mm"/>
+                android:layout_marginBottom="28.7mm"/>
 
             <!-- 灯光状态（由按钮改为文本显示） -->
             <TextView
@@ -228,25 +227,25 @@
                 android:gravity="bottom|center"
                 android:textColor="@color/toggle_text_color"
                 android:text="OFF"
-            android:textSize="20sp" />
+                android:textSize="20sp" />
 
-<!--            <ToggleButton
-                android:id="@+id/control_d"
-                android:layout_width="8mm"
-                android:layout_height="8mm"
-                android:layout_gravity="left|center"
-                android:layout_marginLeft="0mm"
-                android:layout_marginTop="0mm"
-                android:background="@null"
-                android:checked="true"
-                android:fontFamily="@font/msyh"
-                android:textStyle="bold"
-                android:gravity="bottom|center"
-                android:textColor="@color/toggle_text_color"
-                android:textOff="OFF"
-                android:textOn="ON"
-                android:textSize="20sp"
-                />-->
+            <!--            <ToggleButton
+                            android:id="@+id/control_d"
+                            android:layout_width="8mm"
+                            android:layout_height="8mm"
+                            android:layout_gravity="left|center"
+                            android:layout_marginLeft="0mm"
+                            android:layout_marginTop="0mm"
+                            android:background="@null"
+                            android:checked="true"
+                            android:fontFamily="@font/msyh"
+                            android:textStyle="bold"
+                            android:gravity="bottom|center"
+                            android:textColor="@color/toggle_text_color"
+                            android:textOff="OFF"
+                            android:textOn="ON"
+                            android:textSize="20sp"
+                            />-->
 
         </LinearLayout>
 

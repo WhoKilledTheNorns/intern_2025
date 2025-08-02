@@ -21,27 +21,27 @@
             android:orientation="horizontal"
             android:gravity="center_vertical">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:gravity="center_vertical">
-            <!-- 温度折线图 -->
-            <com.github.mikephil.charting.charts.LineChart
-                android:id="@+id/chart_temperature"
-                android:layout_width="240dp"
-                android:layout_height="200dp"
-                android:layout_margin="16dp"
-                android:background="#FFFFFF" />
-
-            <ImageView
-                android:id="@+id/img_temperature"
+            <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:contentDescription="温度图标"
-                android:src="@drawable/temp_icon" />
-        </LinearLayout>
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="center_vertical">
+                <!-- 温度折线图 -->
+                <com.github.mikephil.charting.charts.LineChart
+                    android:id="@+id/chart_temperature"
+                    android:layout_width="240dp"
+                    android:layout_height="200dp"
+                    android:layout_margin="16dp"
+                    android:background="#FFFFFF" />
+
+                <ImageView
+                    android:id="@+id/img_temperature"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:contentDescription="温度图标"
+                    android:src="@drawable/temp_icon" />
+            </LinearLayout>
 
 
             <LinearLayout
@@ -67,67 +67,67 @@
             </LinearLayout>
 
             <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:gravity="center_vertical">
-            <!-- 压力折线图 -->
-            <com.github.mikephil.charting.charts.LineChart
-                android:id="@+id/chart_pressure"
-                android:layout_width="240dp"
-                android:layout_height="200dp"
-                android:layout_margin="16dp"
-                android:background="#FFFFFF" />
-            <ImageView
-                android:id="@+id/img_press"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/press_icon"
-                android:contentDescription="压力图标"
-                android:layout_marginBottom="8dp" />
-        </LinearLayout>
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="center_vertical">
+                <!-- 压力折线图 -->
+                <com.github.mikephil.charting.charts.LineChart
+                    android:id="@+id/chart_pressure"
+                    android:layout_width="240dp"
+                    android:layout_height="200dp"
+                    android:layout_margin="16dp"
+                    android:background="#FFFFFF" />
+                <ImageView
+                    android:id="@+id/img_press"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/press_icon"
+                    android:contentDescription="压力图标"
+                    android:layout_marginBottom="8dp" />
+            </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:gravity="center_vertical">
-            <!-- 亮度折线图 -->
-            <com.github.mikephil.charting.charts.LineChart
-                android:id="@+id/chart_light"
-                android:layout_width="240dp"
-                android:layout_height="200dp"
-                android:layout_margin="16dp"
-                android:background="#FFFFFF" />
-            <ImageView
-                android:id="@+id/img_lumi"
+            <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/lumi_icon"
-                android:contentDescription="亮度图标"
-                android:layout_marginBottom="8dp" />
-        </LinearLayout>
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="center_vertical">
+                <!-- 亮度折线图 -->
+                <com.github.mikephil.charting.charts.LineChart
+                    android:id="@+id/chart_light"
+                    android:layout_width="240dp"
+                    android:layout_height="200dp"
+                    android:layout_margin="16dp"
+                    android:background="#FFFFFF" />
+                <ImageView
+                    android:id="@+id/img_lumi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/lumi_icon"
+                    android:contentDescription="亮度图标"
+                    android:layout_marginBottom="8dp" />
+            </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:gravity="center_vertical">
-            <!-- CO2折线图 -->
-            <com.github.mikephil.charting.charts.LineChart
-                android:id="@+id/chart_CO2"
-                android:layout_width="240dp"
-                android:layout_height="200dp"
-                android:layout_margin="16dp"
-                android:background="#FFFFFF" />
-            <ImageView
-                android:id="@+id/img_co2"
+            <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/co2_icon"
-                android:contentDescription="亮度图标"
-                android:layout_marginBottom="8dp" />
-        </LinearLayout>
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="center_vertical">
+                <!-- CO2折线图 -->
+                <com.github.mikephil.charting.charts.LineChart
+                    android:id="@+id/chart_CO2"
+                    android:layout_width="240dp"
+                    android:layout_height="200dp"
+                    android:layout_margin="16dp"
+                    android:background="#FFFFFF" />
+                <ImageView
+                    android:id="@+id/img_co2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/co2_icon"
+                    android:contentDescription="亮度图标"
+                    android:layout_marginBottom="8dp" />
+            </LinearLayout>
 
         </LinearLayout>
     </HorizontalScrollView>
