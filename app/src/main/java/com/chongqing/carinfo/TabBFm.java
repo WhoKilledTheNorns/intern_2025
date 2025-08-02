@@ -231,7 +231,6 @@ public class TabBFm extends Fragment {
 
         client1=client;
         AToken1=AToken;
-
         TextView tvTemp = viewb.findViewById(R.id.tvTemp);
         TextView tvHumi = viewb.findViewById(R.id.tvHumi);
         TextView tvLumi = viewb.findViewById(R.id.tvLumi);

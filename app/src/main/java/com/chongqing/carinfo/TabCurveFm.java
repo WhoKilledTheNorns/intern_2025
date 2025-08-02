@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -19,8 +20,14 @@ import com.github.mikephil.charting.data.LineDataSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import okhttp3.OkHttpClient;
+
+
 public class TabCurveFm extends Fragment {
 
+    public View viewcurve; // 保存页面View
+    private OkHttpClient client1; // 保存客户端
+    private String AToken1;       // 保存Token
     private List<Entry> tempEntries, humiEntries, pressEntries, lightEntries, co2Entries;
     private LineChart chartTemperature, chartHumidity, chartPressure, chartLight, chartCO2;
     private int index = 0;
@@ -33,7 +40,8 @@ public class TabCurveFm extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.tab_curve, container, false);
+        viewcurve = inflater.inflate(R.layout.tab_curve, container, false);
+        return viewcurve;
     }
 
 
@@ -113,5 +121,20 @@ public class TabCurveFm extends Fragment {
         } catch (NumberFormatException e) {
             Log.e("TabCurveFm", "数据格式错误: " + e.getMessage());
         }
+    }
+
+
+
+
+    public void SetcurveData(String goodamount, String badamount, OkHttpClient client, String AToken) {
+
+        client1=client;
+        AToken1=AToken;
+
+        TextView tvGoodAmount = viewcurve.findViewById(R.id.tvGoodAmount);
+        TextView tvBadAmount = viewcurve.findViewById(R.id.tvBadAmount);
+
+        tvGoodAmount.setText(goodamount);
+        tvBadAmount.setText(badamount);
     }
 }

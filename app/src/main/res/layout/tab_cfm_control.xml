@@ -6,17 +6,35 @@
     android:background="@drawable/bg3"
     android:padding="16dp">
 
-    <TextView
-        android:id="@+id/tvAngle"
+    <LinearLayout
+        android:layout_marginStart="60.7mm"
+        android:layout_marginTop="38mm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Angle: --"
-        android:textSize="18sp" />
+        android:orientation="horizontal"
+        android:layout_gravity="center">
 
-    <TextView
-        android:id="@+id/tvConc"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Concentration: --"
-        android:textSize="18sp" />
+        <TextView
+            android:id="@+id/tvAngle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/msyh"
+            android:textStyle="bold"
+            android:layout_gravity="left|center"
+            android:text=" "
+            android:textColor="#FFFFFF"
+            android:textSize="24dp" />
+
+        <TextView
+            android:id="@+id/tvConc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left|center"
+            android:layout_marginStart="39.8mm"
+            android:fontFamily="@font/msyh"
+            android:textStyle="bold"
+            android:text=" "
+            android:textColor="#FFFFFF"
+            android:textSize="24dp" />
+    </LinearLayout>
 </LinearLayout>

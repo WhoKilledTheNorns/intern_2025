@@ -57,7 +57,7 @@
                 android:fontFamily="@font/msyh"
                 android:textStyle="bold"
                 android:layout_gravity="center"
-                android:text="0"
+                android:text=" "
                 android:textColor="#FFFFFF"
                 android:textSize="24dp"
                 android:layout_marginBottom="25.1mm"/>
@@ -117,7 +117,7 @@
                 android:layout_marginStart="0mm"
                 android:layout_marginTop="0mm"
                 android:orientation="vertical"
-                android:text="0"
+                android:text=" "
                 android:textColor="#FFFFFF"
                 android:textSize="24dp" />
 
@@ -132,7 +132,7 @@
                 android:layout_marginStart="0mm"
                 android:layout_marginTop="26mm"
                 android:orientation="vertical"
-                android:text="0"
+                android:text=" "
                 android:textColor="#FF00FF00"
                 android:textSize="24dp"
                 android:layout_marginBottom="2.7mm"/>
@@ -144,7 +144,7 @@
                 android:fontFamily="@font/msyh"
                 android:textStyle="bold"
                 android:layout_gravity="bottom|left"
-                android:text="0"
+                android:text=" "
                 android:textColor="#FFFF0000"
                 android:textSize="24dp"/>
         </LinearLayout>
@@ -170,7 +170,7 @@
                 android:layout_marginStart="0mm"
                 android:layout_marginTop="0mm"
                 android:orientation="vertical"
-                android:text="0"
+                android:text=" "
                 android:textColor="#FFFFFF"
                 android:textSize="24dp" />
 
@@ -185,7 +185,7 @@
                 android:layout_marginStart="0mm"
                 android:layout_marginTop="30.2mm"
                 android:orientation="vertical"
-                android:text="0"
+                android:text=" "
                 android:textColor="#FFFFFF"
                 android:textSize="24dp" />
 
@@ -208,7 +208,7 @@
                 android:fontFamily="@font/msyh"
                 android:textStyle="bold"
                 android:orientation="vertical"
-                android:text="0"
+                android:text=" "
                 android:textColor="#FFFFFF"
                 android:textSize="24dp"
                 android:layout_marginBottom="28.7mm"/>

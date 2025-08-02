@@ -44,7 +44,6 @@ public class MainActivity<usbIoManager> extends AppCompatActivity {
     private String AToken;
     private TabCurveFm tabCFM_curve; // 从Fragment改到了方法
 
-    private TabAFm tabCFM_a;
     private TabBFm tabCFM_b;
     private TabControlFm tab_cfm_control; // 改成具体的 Fragment 类型
     private Fragment tabCFM_vedio; // 新增视频监控的 fragment
@@ -72,7 +71,7 @@ public class MainActivity<usbIoManager> extends AppCompatActivity {
         final Vibrator vibrator = (Vibrator) this.getSystemService(this.VIBRATOR_SERVICE);
 
         // 初始化 Fragment
-        tabCFM_a = new TabAFm();
+
         tabCFM_b = new TabBFm();
         tabCFM_vedio = new TabVedioFm(); // 新增
         tabCFM_curve = new TabCurveFm(); // 新增
@@ -285,6 +284,8 @@ public class MainActivity<usbIoManager> extends AppCompatActivity {
                 final String finalLight = light;
                 final String finalangle = angle;
                 final String finalconc = conc;
+                final String finalggoodAmount = gamount;
+                final String finalbbadAmount = bamount;
 
                 runOnUiThread(() -> {
                     if (currentFragment == tabCFM_b)
@@ -296,12 +297,7 @@ public class MainActivity<usbIoManager> extends AppCompatActivity {
                     else if (currentFragment == tabCFM_curve)
                             {
                                 tabCFM_curve.updateAllCurves(finalTemperature, finalHumidity, finalPressure, finalLumity, finalCoco);
-                                //灯和风扇控制函数
-                                tabCFM_b.SetTheData(finalTemperature, finalHumidity, finalLumity,finalgoodAmount,finalbadAmount,finalCoco,
-                                    finalPressure,finalFan_state,finalLight,client, AToken);
-
-                                /*tabCFM_b.SetTheLightstatus(finalLight, client, AToken);
-                                tabCFM_b.SetTheFanstatus(finalFan_state, client, AToken);*/
+                               tabCFM_curve.SetcurveData(finalggoodAmount,finalbbadAmount,client, AToken);
                             }
 
 
