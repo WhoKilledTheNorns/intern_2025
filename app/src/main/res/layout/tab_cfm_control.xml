@@ -4,88 +4,105 @@
     android:layout_height="match_parent"
     android:orientation="horizontal"
     android:background="@drawable/bg3"
-    android:padding="16dp">
+    android:gravity="bottom|end"
+
+    android:paddingStart="40dp"
+    android:paddingEnd="40dp"
+    android:paddingBottom="40dp">
 
     <!-- 左侧大图按钮 -->
-    <ImageButton
-        android:id="@+id/btnBigImage"
-        android:layout_width="484dp"
-        android:layout_height="match_parent"
-        android:layout_gravity="center_vertical"
-        android:adjustViewBounds="true"
-        android:background="@null"
-        android:scaleType="fitCenter"
-        android:src="@drawable/mode_auto" />
-
 
     <!-- 右侧整体区域 -->
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_marginStart="20dp"
-        android:gravity="center">
 
-        <!-- 一行：两个文本 + 按钮 -->
+
+
+        <!-- 左侧大图按钮 -->
+
+        <!-- 右侧整体区域 -->
+
+        <ImageButton
+            android:id="@+id/btnBigImage"
+            android:layout_width="80mm"
+            android:layout_height="60mm"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="64dp"
+            android:layout_marginTop="37mm"
+            android:adjustViewBounds="true"
+            android:background="@null"
+            android:scaleType="fitCenter"
+            android:src="@drawable/mode_auto" />
+
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center">
+            android:id="@+id/rightPanel"
+            android:layout_width="449dp"
+            android:layout_height="479dp"
+            android:layout_marginStart="144dp"
+            android:layout_marginTop="100dp"
+            android:layout_toEndOf="@id/btnBigImage"
+            android:gravity="center"
+            android:orientation="vertical">
 
-            <!-- 左边：文本 + 按钮 -->
+            <!-- 一行：两个文本 + 按钮 -->
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:gravity="center_horizontal">
+                android:gravity="center"
+                android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/tvAngle"
+                <!-- 左边：文本 + 按钮 -->
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/msyh"
-                    android:textStyle="bold"
-                    android:text=" "
-                    android:textColor="#FFFFFF"
-                    android:textSize="24dp" />
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
 
-                <ImageButton
-                    android:id="@+id/btnAngle"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_marginTop="50dp"
-                    android:background="@drawable/light_off"
-                    android:scaleType="centerCrop" />
-            </LinearLayout>
+                    <TextView
+                        android:id="@+id/tvAngle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/msyh"
+                        android:text=" "
+                        android:textColor="#FFFFFF"
+                        android:textSize="24dp"
+                        android:textStyle="bold" />
 
-            <!-- 右边：文本 + 按钮 -->
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="27mm"
-                android:layout_marginEnd="30dp"
-                android:orientation="vertical"
-                android:gravity="center_horizontal">
+                    <ImageButton
+                        android:id="@+id/btnAngle"
+                        android:layout_width="130dp"
+                        android:layout_height="100dp"
+                        android:layout_marginTop="50dp"
+                        android:background="@drawable/light_off"
+                        android:scaleType="centerCrop" />
+                </LinearLayout>
 
-                <TextView
-                    android:id="@+id/tvConc"
+                <!-- 右边：文本 + 按钮 -->
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/msyh"
-                    android:textStyle="bold"
-                    android:text=" "
-                    android:textColor="#FFFFFF"
-                    android:textSize="24dp" />
+                    android:layout_marginStart="27mm"
+                    android:layout_marginEnd="30dp"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
 
-                <ImageButton
-                    android:id="@+id/btnConc"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_marginTop="50dp"
-                    android:background="@drawable/fan_off"
-                    android:scaleType="centerCrop" />
+                    <TextView
+                        android:id="@+id/tvConc"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/msyh"
+                        android:text=" "
+                        android:textColor="#FFFFFF"
+                        android:textSize="24dp"
+                        android:textStyle="bold" />
+
+                    <ImageButton
+                        android:id="@+id/btnConc"
+                        android:layout_width="130dp"
+                        android:layout_height="100dp"
+                        android:layout_marginTop="50dp"
+                        android:background="@drawable/fan_off"
+                        android:scaleType="centerCrop" />
+                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
+
 </LinearLayout>

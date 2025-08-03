@@ -62,6 +62,12 @@ public class MainActivity<usbIoManager> extends AppCompatActivity
     private static final String port = "8080";
 
     private volatile boolean running = false;
+    // MainActivity.java
+    private boolean isLightOn = false;
+    private boolean isFanOn = false;
+
+    public boolean getLightStatus() { return isLightOn; }
+    public boolean getFanStatus() { return isFanOn; }
 
 
     @Override
@@ -178,6 +184,7 @@ public class MainActivity<usbIoManager> extends AppCompatActivity
 
     public void controlLight(String status, OkHttpClient client, String token)
     {
+        isLightOn = "ON".equals(status);
         // 找到 TabBFm 实例（根据 Tag）
         TabBFm tabBFm = (TabBFm) getSupportFragmentManager().findFragmentByTag("TabBFmTag");
         if (tabBFm != null)
@@ -189,6 +196,7 @@ public class MainActivity<usbIoManager> extends AppCompatActivity
 
     public void SetTheFanstatus(String FanSt, OkHttpClient client, String AToken)
     {
+        isFanOn = "ON".equals(FanSt);
         TabBFm tabBFm = (TabBFm) getSupportFragmentManager().findFragmentByTag("TabBFmTag");
         if (tabBFm != null)
         {

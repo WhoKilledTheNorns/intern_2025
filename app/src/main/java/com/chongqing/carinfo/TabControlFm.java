@@ -29,7 +29,8 @@ public class TabControlFm extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState) {
+                             @Nullable Bundle savedInstanceState)
+    {
         viewControl = inflater.inflate(R.layout.tab_cfm_control, container, false);
 
         // 绑定控件
@@ -73,6 +74,21 @@ public class TabControlFm extends Fragment {
         });
 
         return viewControl;
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (getActivity() instanceof MainActivity) {
+            MainActivity main = (MainActivity) getActivity();
+            isLightOn = main.getLightStatus();
+            isFanOn = main.getFanStatus();
+
+            ImageButton btnAngle = viewControl.findViewById(R.id.btnAngle);
+            ImageButton btnConc = viewControl.findViewById(R.id.btnConc);
+
+            btnAngle.setBackgroundResource(isLightOn ? R.drawable.light_on : R.drawable.light_off);
+            btnConc.setBackgroundResource(isFanOn ? R.drawable.fan_on : R.drawable.fan_off);
+        }
     }
 
     /**
