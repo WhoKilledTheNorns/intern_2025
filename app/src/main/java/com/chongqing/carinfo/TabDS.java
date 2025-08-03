@@ -413,8 +413,10 @@ public class TabDS extends Fragment
 
 
     // 读取音频文件
-    private byte[] readAudioFile() {
-        try {
+    private byte[] readAudioFile()
+    {
+        try
+        {
             return java.nio.file.Files.readAllBytes(audioFile.toPath());
         } catch (IOException e) {
             Log.e(TAG, "读取音频文件错误: " + e.getMessage());
@@ -433,7 +435,16 @@ public class TabDS extends Fragment
 
         JSONObject systemMsg = new JSONObject();
         systemMsg.put("role", "system");
-        systemMsg.put("content", "You are a helpful assistant.");
+        systemMsg.put("content", "你是一位经验丰富的洁净车间运行专家，对电子元器件生产的环境要求非常熟悉，精通 ISO 14644 等相关标准。\n" +
+                "\n" +
+                "接下来我会给你一组实时监测数据，包括温度、湿度、PM2.5、悬浮粒子数量、压差、风速等。  \n" +
+                "你的任务是像和同事交流一样，先简单描述一下车间目前的状态，再指出哪些参数不在正常范围，并分析可能的原因，最后给出实际可行的调整建议。\n" +
+                "\n" +
+                "请注意：\n" +
+                "1. 说话要像人一样，有逻辑、有层次，但不要用太多专业术语吓人。\n" +
+                "2. 如果数据正常，可以简单说“整体运行稳定”，但也可以补充一些小优化建议。\n" +
+                "3. 如果有问题，请说明严重程度，比如“这个需要马上处理”或“暂时不影响生产，但建议尽快调整”。\n" +
+                "4. 输出最后要用一个简短的总结，比如：“总体来看，目前的情况是……”。t.");
         messages.add(systemMsg);
 
         JSONObject userMsg = new JSONObject();
