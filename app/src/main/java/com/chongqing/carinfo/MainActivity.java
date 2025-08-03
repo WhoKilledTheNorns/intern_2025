@@ -37,7 +37,8 @@ import java.net.Socket;
 import java.util.Arrays;
 
 
-public class MainActivity<usbIoManager> extends AppCompatActivity {
+public class MainActivity<usbIoManager> extends AppCompatActivity
+{
 
     private static final String TAG = "MainActivity";
     private OkHttpClient client;
@@ -64,7 +65,8 @@ public class MainActivity<usbIoManager> extends AppCompatActivity {
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -174,7 +176,30 @@ public class MainActivity<usbIoManager> extends AppCompatActivity {
         }
     }
 
-    private void fetchDeviceData() {
+    public void controlLight(String status, OkHttpClient client, String token)
+    {
+        // 找到 TabBFm 实例（根据 Tag）
+        TabBFm tabBFm = (TabBFm) getSupportFragmentManager().findFragmentByTag("TabBFmTag");
+        if (tabBFm != null)
+        {
+            tabBFm.SetTheLightstatus(status, client, token);
+        }
+    }
+
+
+    public void SetTheFanstatus(String FanSt, OkHttpClient client, String AToken)
+    {
+        TabBFm tabBFm = (TabBFm) getSupportFragmentManager().findFragmentByTag("TabBFmTag");
+        if (tabBFm != null)
+        {
+            tabBFm.SetTheFanstatus(FanSt, client, AToken);
+        }
+
+    }
+
+
+    private void fetchDeviceData()
+    {
         if (AToken == null || AToken.isEmpty()) {
             Log.e(TAG, "AToken 为空，停止请求数据");
             return;
