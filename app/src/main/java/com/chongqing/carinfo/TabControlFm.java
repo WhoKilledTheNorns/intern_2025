@@ -80,8 +80,9 @@ public class TabControlFm extends Fragment {
                 }
                 else
                 {
-                    ((MainActivity)getActivity()).SetTheFanstatus("OFF", client1, AToken1);
                     control_f.setBackgroundResource(R.drawable.fan_off);
+                    ((MainActivity)getActivity()).SetTheFanstatus("OFF", client1, AToken1);
+
                 }
             }
         });
