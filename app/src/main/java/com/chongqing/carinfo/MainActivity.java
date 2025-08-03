@@ -237,10 +237,10 @@ public class MainActivity<usbIoManager> extends AppCompatActivity
     {
         isLightOn = "ON".equals(status);
         // 找到 TabBFm 实例（根据 Tag）
-        TabBFm tabBFm = (TabBFm) getSupportFragmentManager().findFragmentByTag("TabBFmTag");
-        if (tabBFm != null)
+        TabControlFm tab_cfm_control = (TabControlFm) getSupportFragmentManager().findFragmentByTag("TabBFmTag");
+        if (tab_cfm_control != null)
         {
-            tabBFm.SetTheLightstatus(status, client, token);
+            tab_cfm_control.SetTheLightstatus(status, client, token);
         }
     }
 
@@ -248,10 +248,10 @@ public class MainActivity<usbIoManager> extends AppCompatActivity
     public void SetTheFanstatus(String FanSt, OkHttpClient client, String AToken)
     {
         isFanOn = "ON".equals(FanSt);
-        TabBFm tabBFm = (TabBFm) getSupportFragmentManager().findFragmentByTag("TabBFmTag");
-        if (tabBFm != null)
+        TabControlFm tab_cfm_control = (TabControlFm) getSupportFragmentManager().findFragmentByTag("TabBFmTag");
+        if (tab_cfm_control != null)
         {
-            tabBFm.SetTheFanstatus(FanSt, client, AToken);
+            tab_cfm_control.SetTheFanstatus(FanSt, client, AToken);
         }
 
     }
@@ -389,8 +389,8 @@ public class MainActivity<usbIoManager> extends AppCompatActivity
                     {
                         //角度显示函数
                         tab_cfm_control.controlAll(finalangle, finalconc, client, AToken);
-/*                        tabCFM_b.SetTheLightstatus(finalLight, client, AToken);
-                        tabCFM_control.SetTheFanstatus(finalFan_state, client, AToken);*/
+                        tab_cfm_control.SetTheLightstatus(finalLight, client, AToken);
+                        tab_cfm_control.SetTheFanstatus(finalFan_state, client, AToken);
                     }
                 });
             }

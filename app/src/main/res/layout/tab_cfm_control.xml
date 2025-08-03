@@ -65,13 +65,28 @@
                     android:textSize="24dp"
                     android:textStyle="bold" />
 
-                <ImageButton
-                    android:id="@+id/btnAngle"
+                <FrameLayout
                     android:layout_width="130dp"
                     android:layout_height="100dp"
-                    android:layout_marginTop="80dp"
-                    android:background="@drawable/light_off"
-                    android:scaleType="centerCrop" />
+                    android:layout_marginTop="80dp">
+
+                    <!-- 图片 -->
+                    <ImageView
+                        android:id="@+id/light"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/light_off"
+                        android:scaleType="centerCrop" />
+
+                    <!-- 透明按钮 -->
+                    <ToggleButton
+                        android:id="@+id/control_d"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@android:color/transparent"
+                        android:contentDescription="控制按钮" />
+                </FrameLayout>
+
             </LinearLayout>
 
             <!-- 右边：文本 + 按钮 -->
@@ -95,13 +110,28 @@
                     android:textSize="24dp"
                     android:textStyle="bold" />
 
-                <ImageButton
-                    android:id="@+id/btnConc"
+                <FrameLayout
                     android:layout_width="130dp"
                     android:layout_height="100dp"
-                    android:layout_marginTop="80dp"
-                    android:background="@drawable/fan_off"
-                    android:scaleType="centerCrop" />
+                    android:layout_marginTop="80dp">
+
+                    <!-- 显示风扇图标 -->
+                    <ImageView
+                        android:id="@+id/fan"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/fan_off"
+                        android:scaleType="centerCrop" />
+
+                    <!-- 透明点击按钮 -->
+                    <ToggleButton
+                        android:id="@+id/control_f"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@android:color/transparent"
+                        android:contentDescription="风扇按钮" />
+                </FrameLayout>
+
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

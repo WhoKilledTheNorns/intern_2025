@@ -36,20 +36,16 @@ public class TabBFm extends Fragment {
     private static final String ARG_PARAM2 = "param2";
 
     public View viewb;
-    ToggleButton control;
 
-    private static final String TAG = "MainActivity";
+
+
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
-    MediaType mediaType = MediaType.parse("application/json");//修改成这句话，在标准版里面 cgh2024/3/19
-    RequestBody body;
+
     OkHttpClient client1;
     String AToken1;
-
-
-    private int msg_presh = 0;
 
     public TabBFm() {
         // Required empty public constructor
@@ -92,141 +88,7 @@ public class TabBFm extends Fragment {
         return viewb;
     }
 
-    /*灯状态控制*/
-    public void SetTheLightstatus(String lightSt, OkHttpClient client, String AToken) {
 
-//        ImageView lightold = viewb.findViewById(R.id.light);//句柄，图片
-
-        control = viewb.findViewById(R.id.control_d);
-        control.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean a) {
-
-
-                if (buttonView.isPressed()) {
-                    if (!buttonView.isChecked()) {
-                        //下发开灯
-                        body = RequestBody.create(mediaType, "{\n" +
-                                " \"service_id\": \"SmartCockpit\",\n" +
-                                " \"command_name\": \"Light\",\n" +
-                                " \"paras\": {\n" +
-                                "  \"Light\": \"ON\"\n" +
-                                " }\n" +
-                                "}");
-                        msg_presh = 1;
-                        sendMessage(client,AToken,body);
-
-                    } else {
-                        //下发关灯
-
-                        body = RequestBody.create(mediaType, "{\n" +
-                                " \"service_id\": \"SmartCockpit\",\n" +
-                                " \"command_name\": \"Light\",\n" +
-                                " \"paras\": {\n" +
-                                "  \"Light\": \"OFF\"\n" +
-                                " }\n" +
-                                "}");
-                        msg_presh = 1;
-                        sendMessage(client,AToken,body);
-                    }
-
-                }
-            }
-        });
-
-
-
-        if (msg_presh != 1) {//msg_presh 是防止文字乱变 图片更换
-            if (lightSt.compareTo("OFF") == 0) {
-//                lightold.setImageResource(R.drawable.light_off);
-                control.setChecked(true);
-            } else {
-//                lightold.setImageResource(R.drawable.light_on);
-                control.setChecked(false);
-            }
-        } else
-            msg_presh = 0;
-
-
-    }
-
-    /*风扇状态控制*/
-    public void SetTheFanstatus(String FanSt, OkHttpClient client, String AToken) {
-
-//        ImageView fantold = viewb.findViewById(R.id.fan);//句柄，图片
-
-        control = viewb.findViewById(R.id.control_f);
-        control.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean a) {
-
-
-                if (buttonView.isPressed()) {
-                    if (!buttonView.isChecked()) {
-                        //下发开风扇
-                        body = RequestBody.create(mediaType, "{\n" +
-                                " \"service_id\": \"SmartCockpit\",\n" +
-                                " \"command_name\": \"Light\",\n" +
-                                " \"paras\": {\n" +
-                                "  \"Fan\": \"ON\"\n" +
-                                " }\n" +
-                                "}");
-                        msg_presh = 1;
-                        sendMessage(client,AToken,body);
-
-                    } else {
-                        //下发关风扇
-
-                        body = RequestBody.create(mediaType, "{\n" +
-                                " \"service_id\": \"SmartCockpit\",\n" +
-                                " \"command_name\": \"Light\",\n" +
-                                " \"paras\": {\n" +
-                                "  \"Fan\": \"OFF\"\n" +
-                                " }\n" +
-                                "}");
-                        msg_presh = 1;
-                        sendMessage(client,AToken,body);
-                    }
-
-                }
-            }
-        });
-
-        if (msg_presh != 1) {//msg_presh 是防止文字乱变 图片更换
-            if (FanSt.compareTo("OFF") == 0) {
-
-                control.setChecked(true);
-            } else {
-
-                control.setChecked(false);
-            }
-        } else
-            msg_presh = 0;
-
-
-    }
-
-    public void sendMessage(OkHttpClient client, String AToken, RequestBody body) {
-        Request request = new Request.Builder()
-                .url("https://d75ff9379a.st1.iotda-app.cn-north-4.myhuaweicloud.com:443/v5/iot/ba12250a69f543479841481557c1e554/devices/6886e669d582f200183fdcc5_smartcontrol/commands")
-                .method("POST", body)
-                .addHeader("X-Auth-Token", AToken)
-                .addHeader("Content-Type", "application/json")
-                .build();
-        client.newCall(request).enqueue(new Callback() {
-
-            @Override
-            public void onFailure(Call call, IOException e) {
-            }
-
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                Log.d(TAG, response.body().string());
-            }
-        });
-
-
-    }
     public void SetTheData(String temp, String humi,String lumi,String goodamount,String badamount, String ccoo,String press,String fengshan,String dengdeng,OkHttpClient client, String AToken) {
 
         client1=client;
@@ -250,5 +112,8 @@ public class TabBFm extends Fragment {
         tvPres.setText(press);
         tvFanfan.setText(fengshan);
         tvDengdeng.setText(dengdeng);
+    }
+
+    public void SetTheFanstatus(String fanSt, OkHttpClient client, String aToken) {
     }
 }
