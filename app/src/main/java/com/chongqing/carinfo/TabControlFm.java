@@ -79,7 +79,7 @@ public class TabControlFm extends Fragment {
         // 自动/手动档位切换
         btnBigImage.setOnClickListener(new View.OnClickListener()
         {
-<<<<<<< HEAD
+
             @Override
             public void onClick(View v) {
                 isFanOn = !isFanOn;
@@ -92,20 +92,6 @@ public class TabControlFm extends Fragment {
                     btnBigImage.setBackgroundResource(R.drawable.mode_man);
                 }
             }
-=======
-        @Override
-        public void onClick(View v) {
-            isFanOn = !isFanOn;
-            if (autoMannual)
-            {
-                btnBigImage.setBackgroundResource(R.drawable.mode_auto);
-            }
-            else
-            {
-                btnBigImage.setBackgroundResource(R.drawable.mode_man);
-            }
-        }
->>>>>>> 7af13a27303917e2d253349a180938560c9d45ac
         });
 
         return viewControl;
