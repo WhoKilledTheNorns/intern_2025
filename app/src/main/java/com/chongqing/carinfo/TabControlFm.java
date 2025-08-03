@@ -25,6 +25,7 @@ public class TabControlFm extends Fragment {
 
     private boolean isLightOn = false;
     private boolean isFanOn = false;
+    private boolean autoMannual = false;
 
     @Nullable
     @Override
@@ -36,6 +37,7 @@ public class TabControlFm extends Fragment {
         // 绑定控件
         ImageButton btnAngle = viewControl.findViewById(R.id.btnAngle);
         ImageButton btnConc = viewControl.findViewById(R.id.btnConc);
+        ImageButton btnBigImage = viewControl.findViewById(R.id.btnBigImage);
 
         // 灯泡按钮点击事件
         btnAngle.setOnClickListener(new View.OnClickListener() {
@@ -69,6 +71,24 @@ public class TabControlFm extends Fragment {
                 {
                     ((MainActivity)getActivity()).SetTheFanstatus("OFF", client1, AToken1);
                     btnConc.setBackgroundResource(R.drawable.fan_off);
+                }
+            }
+        });
+
+
+        // 自动/手动档位切换
+        btnBigImage.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v) {
+                isFanOn = !isFanOn;
+                if (autoMannual)
+                {
+                    btnBigImage.setBackgroundResource(R.drawable.mode_auto);
+                }
+                else
+                {
+                    btnBigImage.setBackgroundResource(R.drawable.mode_man);
                 }
             }
         });
