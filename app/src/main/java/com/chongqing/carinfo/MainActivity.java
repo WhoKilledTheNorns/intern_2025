@@ -81,7 +81,7 @@ public class MainActivity<usbIoManager> extends AppCompatActivity
     //下面的变量是整活的内容
 
     // DeepSeek API
-    private String APIkey = "sk-a60e3521045b4627979bcf500da09a1a";
+    private String APIkey = "sk-8c9b995fe08c4b179591913eab5bc7a7";
     private boolean responseflag = true;
     private String speekstring = "";
 

@@ -68,6 +68,7 @@ import androidx.fragment.app.Fragment;
 import org.json.JSONException;
 
 
+import org.json.JSONException;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.MediaType;
@@ -110,7 +111,7 @@ public class TabDS extends Fragment
 
     private OkHttpClient client;
 
-    private String APIkey = "sk-0a469df74a2e4016a3d99f642708da46";
+    private String APIkey = "sk-8c9b995fe08c4b179591913eab5bc7a7";
 
 
 
@@ -421,22 +422,32 @@ public class TabDS extends Fragment
         }
     }
 
-    // 发送文本到DeepSeek
-    private void sendTextToDeepSeek(String text)
-    {
-
+    private void sendTextToDeepSeek(String text) {
         MediaType mediaType = MediaType.parse("application/json");
-        RequestBody body = RequestBody.create(mediaType, "{\n" +
-                "        \"model\": \"deepseek-chat\",\n" +
-                "        \"messages\": [\n" +
-                "          {\"role\": \"system\", \"content\": \"You are a helpful assistant.\"},\n" +
-                "          {\"role\": \"user\", \"content\": \"" + text + "限制字数200字" + "\"}\n" +
-                "        ],\n" +
-                "        \"stream\": false\n" +
-                "      }");
+        JSONObject payload = new JSONObject();
+
+        // 构造请求 JSON
+        payload.put("model", "deepseek-chat");
+
+        JSONArray messages = new JSONArray();
+
+        JSONObject systemMsg = new JSONObject();
+        systemMsg.put("role", "system");
+        systemMsg.put("content", "You are a helpful assistant.");
+        messages.add(systemMsg);
+
+        JSONObject userMsg = new JSONObject();
+        userMsg.put("role", "user");
+        userMsg.put("content", text + " 限制字数200字");
+        messages.add(userMsg);
+
+        payload.put("messages", messages);
+
+        // OkHttp 3.x 写法
+        RequestBody body = RequestBody.create(mediaType, payload.toJSONString());
 
         Request request = new Request.Builder()
-                .url("https://api.deepseek.com/chat/completions")
+                .url("https://api.deepseek.com/v1/chat/completions")
                 .method("POST", body)
                 .addHeader("Content-Type", "application/json")
                 .addHeader("Authorization", "Bearer " + APIkey)
@@ -445,50 +456,39 @@ public class TabDS extends Fragment
         client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-                Log.i(TAG, "DeepSeek API调用失败: " + e.toString());
-                if (isAdded()) {
-                    requireActivity().runOnUiThread(() -> {
-                        Toast.makeText(requireContext(), "DeepSeek API调用失败", Toast.LENGTH_SHORT).show();
-                        resetButtonState();
-                    });
-                }
+                Log.i(TAG, "DeepSeek API调用失败: " + e);
             }
 
             @Override
-            public void onResponse(Call call, Response response) throws IOException
-            {
-                try {
-                    JSONObject object = JSON.parseObject(response.body().string());
-                    if (object != null) {
-                        JSONArray choices = object.getJSONArray("choices");
-                        if (choices != null) {
-                            JSONObject choices1 = choices.getJSONObject(0);
-                            JSONObject message = choices1.getJSONObject("message");
-                            speekstring = message.getString("content");
-                        }
-                    }
+            public void onResponse(Call call, Response response) throws IOException {
+                String respStr = response.body().string();
+                Log.i(TAG, "HTTP Code: " + response.code() + " Body: " + respStr);
 
-                    final String finalSpeekstring = speekstring;
+                if (!response.isSuccessful()) {
+                    return;
+                }
+
+                try {
+                    JSONObject object = JSONObject.parseObject(respStr);
+                    JSONArray choices = object.getJSONArray("choices");
+                    JSONObject message = choices.getJSONObject(0).getJSONObject("message");
+                    speekstring = message.getString("content");
+
                     if (isAdded()) {
                         requireActivity().runOnUiThread(() -> {
-                            getTv_sendspeeddata.setText(finalSpeekstring);
-                            // 调用语音播报
-                            speakText(finalSpeekstring);
-                            resetButtonState();
+                            getTv_sendspeeddata.setText(speekstring);
+                            speakText(speekstring);
                         });
                     }
                 } catch (Exception e) {
-                    Log.e(TAG, "处理DeepSeek响应错误: " + e.getMessage());
-                    if (isAdded()) {
-                        requireActivity().runOnUiThread(() -> {
-                            Toast.makeText(requireContext(), "处理响应时出错", Toast.LENGTH_SHORT).show();
-                            resetButtonState();
-                        });
-                    }
+                    Log.e(TAG, "解析错误: " + e.getMessage());
                 }
             }
         });
     }
+
+
+
 
     // 文字转语音
     private void speakText(String text) {

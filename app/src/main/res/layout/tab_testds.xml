@@ -16,7 +16,7 @@
         android:layout_gravity="center"
         android:layout_marginTop="24dp"
         android:layout_marginBottom="24dp"
-        android:text="学生训练大模型接入系统"
+        android:text="工厂状态监测咨询系统"
         android:textColor="#008080"
         android:textSize="24sp"
         android:textStyle="bold" />
