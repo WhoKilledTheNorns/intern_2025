@@ -2,39 +2,107 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:orientation="horizontal"
     android:background="@drawable/bg3"
-    android:padding="16dp">
+    android:gravity="bottom|end"
 
-    <LinearLayout
-        android:layout_marginStart="60.7mm"
-        android:layout_marginTop="38mm"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_gravity="center">
+    android:paddingStart="40dp"
+    android:paddingEnd="40dp"
+    android:paddingBottom="40dp">
 
-        <TextView
-            android:id="@+id/tvAngle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/msyh"
-            android:textStyle="bold"
-            android:layout_gravity="left|center"
-            android:text=" "
-            android:textColor="#FFFFFF"
-            android:textSize="24dp" />
+    <!-- 左侧大图按钮 -->
 
-        <TextView
-            android:id="@+id/tvConc"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="left|center"
-            android:layout_marginStart="39.8mm"
-            android:fontFamily="@font/msyh"
-            android:textStyle="bold"
-            android:text=" "
-            android:textColor="#FFFFFF"
-            android:textSize="24dp" />
-    </LinearLayout>
+    <!-- 右侧整体区域 -->
+
+
+
+        <!-- 左侧大图按钮 -->
+
+        <!-- 右侧整体区域 -->
+
+        <ImageButton
+            android:id="@+id/btnBigImage"
+            android:layout_width="80mm"
+            android:layout_height="60mm"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="64dp"
+            android:layout_marginTop="37mm"
+            android:adjustViewBounds="true"
+            android:background="@null"
+            android:scaleType="fitCenter"
+            android:src="@drawable/mode_auto" />
+
+        <LinearLayout
+            android:id="@+id/rightPanel"
+            android:layout_width="449dp"
+            android:layout_height="479dp"
+            android:layout_marginStart="144dp"
+            android:layout_marginTop="100dp"
+            android:layout_toEndOf="@id/btnBigImage"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <!-- 一行：两个文本 + 按钮 -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <!-- 左边：文本 + 按钮 -->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvAngle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/msyh"
+                        android:text=" "
+                        android:textColor="#FFFFFF"
+                        android:textSize="24dp"
+                        android:textStyle="bold" />
+
+                    <ImageButton
+                        android:id="@+id/btnAngle"
+                        android:layout_width="130dp"
+                        android:layout_height="100dp"
+                        android:layout_marginTop="50dp"
+                        android:background="@drawable/light_off"
+                        android:scaleType="centerCrop" />
+                </LinearLayout>
+
+                <!-- 右边：文本 + 按钮 -->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="27mm"
+                    android:layout_marginEnd="30dp"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvConc"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/msyh"
+                        android:text=" "
+                        android:textColor="#FFFFFF"
+                        android:textSize="24dp"
+                        android:textStyle="bold" />
+
+                    <ImageButton
+                        android:id="@+id/btnConc"
+                        android:layout_width="130dp"
+                        android:layout_height="100dp"
+                        android:layout_marginTop="50dp"
+                        android:background="@drawable/fan_off"
+                        android:scaleType="centerCrop" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
 </LinearLayout>

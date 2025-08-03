@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">智感云控——基于STM32的电子元器件洁净车间监测与控制系统</string>
+    <string name="app_name">智感云控</string>
     <string name="title_activity_main2">MainActivity2</string>
     <string name="tab_text_1">Tab 1</string>
     <string name="tab_text_2">Tab 2</string>
