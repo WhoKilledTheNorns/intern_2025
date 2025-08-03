@@ -141,8 +141,12 @@ public class MainActivity<usbIoManager> extends AppCompatActivity
         btnTemp.setOnClickListener(v -> switchFragment(tabCFM_b));
         btnVideo.setOnClickListener(v -> switchFragment(tabCFM_vedio));
         btnCurve.setOnClickListener(v -> switchFragment(tabCFM_curve)); // 新增
+<<<<<<< HEAD
         btnControl.setOnClickListener(v -> switchFragment(tab_cfm_control)); // 新增
         btnDS.setOnClickListener(v -> switchFragment(TabDS)); // 新增
+=======
+        btnControl.setOnClickListener(v -> switchFragment(TabDS)); // 新增
+>>>>>>> 7af13a27303917e2d253349a180938560c9d45ac
         btnExit.setOnClickListener(v -> finish());
 
         // 初始化 OkHttp
@@ -221,6 +225,15 @@ public class MainActivity<usbIoManager> extends AppCompatActivity
         return AToken;
     }
 
+<<<<<<< HEAD
+=======
+
+
+
+
+
+
+>>>>>>> 7af13a27303917e2d253349a180938560c9d45ac
     private void switchFragment(Fragment fragment) {
         if (currentFragment != fragment) {
             currentFragment = fragment;
