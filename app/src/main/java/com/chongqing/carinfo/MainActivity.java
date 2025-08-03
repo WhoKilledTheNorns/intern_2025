@@ -37,6 +37,14 @@ import java.net.Socket;
 import java.util.Arrays;
 
 
+import android.media.AudioRecord;
+import android.media.AudioFormat;
+import android.os.Environment;
+import android.speech.tts.TextToSpeech;
+
+import java.io.File;
+
+
 public class MainActivity<usbIoManager> extends AppCompatActivity
 {
 
@@ -49,6 +57,7 @@ public class MainActivity<usbIoManager> extends AppCompatActivity
     private TabControlFm tab_cfm_control; // 改成具体的 Fragment 类型
     private Fragment tabCFM_vedio; // 新增视频监控的 fragment
     private Fragment currentFragment;
+    private Fragment TabDS;
 
 
     private ImageButton btnTemp, btnVideo, btnExit, btnCurve, btnControl;
@@ -69,6 +78,37 @@ public class MainActivity<usbIoManager> extends AppCompatActivity
     public boolean getLightStatus() { return isLightOn; }
     public boolean getFanStatus() { return isFanOn; }
 
+    //下面的变量是整活的内容
+
+    // DeepSeek API
+    private String APIkey = "sk-a60e3521045b4627979bcf500da09a1a";
+    private boolean responseflag = true;
+    private String speekstring = "";
+
+    // 录音
+    private static final int REQUEST_RECORD_AUDIO_PERMISSION = 200;
+    private AudioRecord audioRecord;
+    private static final int SAMPLE_RATE = 16000;
+    private static final int CHANNEL_CONFIG = AudioFormat.CHANNEL_IN_MONO;
+    private static final int AUDIO_FORMAT = AudioFormat.ENCODING_PCM_16BIT;
+    private static final String AUDIO_FILE_PATH = Environment.getExternalStorageDirectory() + "/user_audio.pcm";
+    private File audioFile;
+    private boolean isRecording = false;
+    private Thread recordingThread;
+
+    // 华为云
+    private String huaweiProjectId = "0c784d91a300f4fa2ff7c01c20885fa6";
+    private String huaweiRegion = "cn-north-4";
+    private String huaweiToken = "";
+    private static final String AUDIO_FILE_NAME = "user_audio.pcm";
+
+    // TTS
+    private TextToSpeech textToSpeech;
+    private boolean isTtsInitialized = false;
+    private boolean isSpeakEnabled = true;
+    private float speechRate = 1.0f;
+    private float pitch = 1.0f;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -84,6 +124,7 @@ public class MainActivity<usbIoManager> extends AppCompatActivity
         tabCFM_vedio = new TabVedioFm(); // 新增
         tabCFM_curve = new TabCurveFm(); // 新增
         tab_cfm_control = new TabControlFm();
+        TabDS = new TabDS();
 
         // 绑定按钮
         btnTemp = findViewById(R.id.btn_temp);
@@ -99,7 +140,7 @@ public class MainActivity<usbIoManager> extends AppCompatActivity
         btnTemp.setOnClickListener(v -> switchFragment(tabCFM_b));
         btnVideo.setOnClickListener(v -> switchFragment(tabCFM_vedio));
         btnCurve.setOnClickListener(v -> switchFragment(tabCFM_curve)); // 新增
-        btnControl.setOnClickListener(v -> switchFragment(tab_cfm_control)); // 新增
+        btnControl.setOnClickListener(v -> switchFragment(TabDS)); // 新增
         btnExit.setOnClickListener(v -> finish());
 
         // 初始化 OkHttp
@@ -171,6 +212,18 @@ public class MainActivity<usbIoManager> extends AppCompatActivity
             }
         });
     }
+
+
+    public String getAToken()
+    {
+        return AToken;
+    }
+
+
+
+
+
+
 
     private void switchFragment(Fragment fragment) {
         if (currentFragment != fragment) {
