@@ -31,7 +31,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
-        android:layout_marginEnd="200dp"
+        android:layout_marginEnd="175dp"
         android:layout_marginBottom="16dp"
         android:padding="8dp"
         android:text="当前帧率: -- FPS"
