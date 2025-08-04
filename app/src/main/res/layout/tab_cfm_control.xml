@@ -83,6 +83,9 @@
                         android:id="@+id/control_d"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:textOff=""
+                        android:textOn=""
+                        android:text=""
                         android:background="@android:color/transparent"
                         android:contentDescription="控制按钮" />
                 </FrameLayout>
@@ -128,6 +131,9 @@
                         android:id="@+id/control_f"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:textOff=""
+                        android:textOn=""
+                        android:text=""
                         android:background="@android:color/transparent"
                         android:contentDescription="风扇按钮" />
                 </FrameLayout>
