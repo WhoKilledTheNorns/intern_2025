@@ -13,7 +13,7 @@ import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.ToggleButton;
-
+import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -112,8 +112,12 @@ public class TabControlFm extends Fragment {
                     // 自动模式下，不允许手动控制 isFanOn 和 isLightOn
                     // 这里可以选择是否复位状态
                     Log.d("状态", "已进入自动模式，禁止控制 isFanOn 和 isLightOn");
+                    control_d.setBackgroundResource( R.drawable.auto_light);
+                    control_f.setBackgroundResource(R.drawable.auto_fan);
                 } else {
                     btnBigImage.setImageResource(R.drawable.mode_man);
+                    control_d.setBackgroundResource(isLightOn ? R.drawable.light_on : R.drawable.light_off);
+                    control_f.setBackgroundResource(isFanOn ? R.drawable.fan_on : R.drawable.fan_off);
 
                     // 在手动模式下允许控制
                     Log.d("状态", "已进入手动模式，可以控制 isFanOn 和 isLightOn");
@@ -121,11 +125,23 @@ public class TabControlFm extends Fragment {
             }
         });
 
+
+        if (autoMannual) {
+            control_d.setBackgroundResource(R.drawable.auto_light);
+            control_f.setBackgroundResource(R.drawable.auto_fan);
+        } else {
+            control_d.setBackgroundResource(isLightOn ? R.drawable.light_on : R.drawable.light_off);
+            control_f.setBackgroundResource(isFanOn ? R.drawable.fan_on : R.drawable.fan_off);
+        }
+
+
         return viewControl;
     }
     @Override
     public void onResume() {
         super.onResume();
+
+
         if (getActivity() instanceof MainActivity) {
             MainActivity main = (MainActivity) getActivity();
             isLightOn = main.getLightStatus();
