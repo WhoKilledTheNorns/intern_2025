@@ -125,16 +125,6 @@ public class TabControlFm extends Fragment {
             }
         });
 
-
-        if (autoMannual) {
-            control_d.setBackgroundResource(R.drawable.auto_light);
-            control_f.setBackgroundResource(R.drawable.auto_fan);
-        } else {
-            control_d.setBackgroundResource(isLightOn ? R.drawable.light_on : R.drawable.light_off);
-            control_f.setBackgroundResource(isFanOn ? R.drawable.fan_on : R.drawable.fan_off);
-        }
-
-
         return viewControl;
     }
     @Override

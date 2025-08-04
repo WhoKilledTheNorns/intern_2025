@@ -45,7 +45,7 @@
                 android:fontFamily="@font/msyh"
                 android:textStyle="bold"
                 android:layout_gravity="center"
-                android:text="32.5"
+                android:text="30.0"
                 android:textColor="#FFFF0000"
                 android:textSize="24sp"
                 android:layout_marginBottom="3.5mm"/>

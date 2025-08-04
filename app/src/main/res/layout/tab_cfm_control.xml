@@ -72,7 +72,7 @@
                         android:id="@+id/light"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:src="@drawable/light_off"
+                        android:src="@drawable/auto_light"
                         android:scaleType="centerCrop" />
 
                     <!-- 透明按钮 -->
@@ -122,7 +122,7 @@
                         android:id="@+id/fan"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:src="@drawable/fan_off"
+                        android:src="@drawable/auto_fan"
                         android:scaleType="centerCrop" />
 
                     <!-- 透明点击按钮 -->
