@@ -36,7 +36,7 @@ public class TabControlFm extends Fragment {
 
     private boolean isLightOn = false;
     private boolean isFanOn = false;
-    private boolean autoMannual = true;
+    private boolean autoMannual = false;
 
     @Nullable
     @Override
