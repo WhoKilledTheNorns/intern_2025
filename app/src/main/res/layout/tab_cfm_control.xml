@@ -1,19 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
     android:background="@drawable/bg3">
-
-    <!-- 左侧大图按钮 -->
-
-    <!-- 右侧整体区域 -->
-
-
-
-    <!-- 左侧大图按钮 -->
-
-    <!-- 右侧整体区域 -->
 
     <ImageButton
         android:id="@+id/btnBigImage"
@@ -28,6 +22,7 @@
         android:src="@drawable/mode_auto" />
 
     <LinearLayout
+
         android:id="@+id/rightPanel"
         android:layout_width="449dp"
         android:layout_height="479dp"
@@ -36,6 +31,8 @@
         android:layout_toEndOf="@id/btnBigImage"
         android:gravity="center"
         android:orientation="vertical">
+
+
 
         <!-- 一行：两个文本 + 按钮 -->
         <LinearLayout
@@ -83,8 +80,13 @@
                         android:id="@+id/control_d"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:textOff=""
+                        android:textOn=""
+                        android:text=""
                         android:background="@android:color/transparent"
                         android:contentDescription="控制按钮" />
+                    <!-- 中间层：auto 图标，默认可见或隐藏 -->
+
                 </FrameLayout>
 
             </LinearLayout>
@@ -128,12 +130,18 @@
                         android:id="@+id/control_f"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:textOff=""
+                        android:textOn=""
+                        android:text=""
                         android:background="@android:color/transparent"
                         android:contentDescription="风扇按钮" />
                 </FrameLayout>
 
             </LinearLayout>
         </LinearLayout>
+
     </LinearLayout>
 
 </LinearLayout>
+
+</FrameLayout>

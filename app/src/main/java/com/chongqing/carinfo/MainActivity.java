@@ -135,7 +135,7 @@ public class MainActivity<usbIoManager> extends AppCompatActivity
         btnDS = findViewById(R.id.btn_DS);
 
         // 默认显示温湿度页面
-        switchFragment(tab_cfm_control);
+        switchFragment(tabCFM_b);
 
         // 按钮点击事件
         btnTemp.setOnClickListener(v -> switchFragment(tabCFM_b));
@@ -367,7 +367,7 @@ public class MainActivity<usbIoManager> extends AppCompatActivity
                 final String finalCoco = coco;
                 final String finalLight = light;
                 final String finalangle = angle;
-                final String finalconc = conc;
+                final String finalconc = conc.length() >= 3 ? conc.substring(conc.length() - 3) : conc;
                 final String finalggoodAmount = gamount;
                 final String finalbbadAmount = bamount;
 

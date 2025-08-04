@@ -13,7 +13,7 @@ import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.ToggleButton;
-
+import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -54,34 +54,46 @@ public class TabControlFm extends Fragment {
         control_d.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                isLightOn = !isLightOn;
-                if (isLightOn)
-                {
-                    ((MainActivity)getActivity()).controlLight("ON", client1, AToken1);
-                    control_d.setBackgroundResource(R.drawable.light_on);
-                }
-                else
-                {
-                    ((MainActivity)getActivity()).controlLight("OFF", client1, AToken1);
-                    control_d.setBackgroundResource(R.drawable.light_off);
+                if (!autoMannual) {
+                    isLightOn = !isLightOn;
+                    if (isLightOn) {
+                        ((MainActivity)getActivity()).controlLight("ON", client1, AToken1);
+                        control_d.setBackgroundResource(R.drawable.light_on);
+                        control_d.setChecked(true);
+                    } else {
+                        ((MainActivity)getActivity()).controlLight("OFF", client1, AToken1);
+                        control_d.setBackgroundResource(R.drawable.light_off);
+                        control_d.setChecked(false);
+                    }
+                } else {
+                    // 阻止切换状态：恢复按钮状态为当前 isLightOn 状态
+                    control_d.setChecked(isLightOn);  // true or false
+//                    control_d.setBackgroundResource(android.R.color.transparent); // 不显示图片
+
                 }
             }
         });
+
 
         // 风扇按钮点击事件
         control_f.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                isFanOn = !isFanOn;
-                if (isFanOn)
-                {
-                    control_f.setBackgroundResource(R.drawable.fan_on);
-                    ((MainActivity)getActivity()).SetTheFanstatus("ON", client1, AToken1);
-                }
-                else
-                {
-                    ((MainActivity)getActivity()).SetTheFanstatus("OFF", client1, AToken1);
-                    control_f.setBackgroundResource(R.drawable.fan_off);
+                if (!autoMannual) {
+                    isFanOn = !isFanOn;
+                    if (isFanOn) {
+                        ((MainActivity)getActivity()).SetTheFanstatus("ON", client1, AToken1);
+                        control_f.setBackgroundResource(R.drawable.fan_on);
+                        control_f.setChecked(true);
+                    } else {
+                        ((MainActivity)getActivity()).SetTheFanstatus("OFF", client1, AToken1);
+                        control_f.setBackgroundResource(R.drawable.fan_off);
+                        control_f.setChecked(false);
+                    }
+                }else {
+                    // 阻止切换状态：恢复按钮状态为当前 isLightOn 状态
+                    control_f.setChecked(isFanOn);  // true or false
+//                    control_f.setBackgroundResource(android.R.color.transparent); // 不显示图片
                 }
             }
         });
@@ -93,23 +105,43 @@ public class TabControlFm extends Fragment {
 
             @Override
             public void onClick(View v) {
-                isFanOn = !isFanOn;
-                if (autoMannual)
-                {
-                    btnBigImage.setBackgroundResource(R.drawable.mode_auto);
-                }
-                else
-                {
-                    btnBigImage.setBackgroundResource(R.drawable.mode_man);
+                autoMannual = !autoMannual;  // 切换状态
+                if (autoMannual) {
+                    btnBigImage.setImageResource(R.drawable.mode_auto);
+
+                    // 自动模式下，不允许手动控制 isFanOn 和 isLightOn
+                    // 这里可以选择是否复位状态
+                    Log.d("状态", "已进入自动模式，禁止控制 isFanOn 和 isLightOn");
+                    control_d.setBackgroundResource( R.drawable.auto_light);
+                    control_f.setBackgroundResource(R.drawable.auto_fan);
+                } else {
+                    btnBigImage.setImageResource(R.drawable.mode_man);
+                    control_d.setBackgroundResource(isLightOn ? R.drawable.light_on : R.drawable.light_off);
+                    control_f.setBackgroundResource(isFanOn ? R.drawable.fan_on : R.drawable.fan_off);
+
+                    // 在手动模式下允许控制
+                    Log.d("状态", "已进入手动模式，可以控制 isFanOn 和 isLightOn");
                 }
             }
         });
+
+
+        if (autoMannual) {
+            control_d.setBackgroundResource(R.drawable.auto_light);
+            control_f.setBackgroundResource(R.drawable.auto_fan);
+        } else {
+            control_d.setBackgroundResource(isLightOn ? R.drawable.light_on : R.drawable.light_off);
+            control_f.setBackgroundResource(isFanOn ? R.drawable.fan_on : R.drawable.fan_off);
+        }
+
 
         return viewControl;
     }
     @Override
     public void onResume() {
         super.onResume();
+
+
         if (getActivity() instanceof MainActivity) {
             MainActivity main = (MainActivity) getActivity();
             isLightOn = main.getLightStatus();
