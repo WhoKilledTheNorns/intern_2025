@@ -2,7 +2,9 @@ package com.chongqing.carinfo;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-
+import android.speech.tts.TextToSpeech;
+import android.content.Context;
+import java.util.Locale;
 import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
@@ -118,12 +120,21 @@ public class TabDS extends Fragment
     // 录音相关变量
     private static final String AUDIO_FILE_NAME = "user_audio.pcm";
 
+    // 在类里加两个变量（放到 DeepSeekAPI 外层的 Activity/Fragment 成员变量中）
+    private String lastDeepSeekResult = null; // 保存 DeepSeek 最新内容
+    private boolean isTtsReady = false;       // TTS 就绪状态
+    private TextToSpeech tts;                 // TTS 实例
+
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState)
     {
+        testTTS();
+        initTTS();
+
+
         View view = inflater.inflate(R.layout.tab_testds, container, false);
 
         // 初始化 OkHttpClient
@@ -374,8 +385,9 @@ public class TabDS extends Fragment
         String[] result = new String[2];
         try
         {
+
             String url = "wss://sis-ext." + "cn-north-4" + ".myhuaweicloud.cn/v1/" +
-                    "0c784d91a300f4fa2ff7c01c20885fa6" + "/rasr/short-stream";
+                    "ba12250a69f543479841481557c1e554" + "/rasr/short-stream";
 
             OkHttpClient wsClient = new OkHttpClient();
             final WebSocket ws = wsClient.newWebSocket(
@@ -387,6 +399,16 @@ public class TabDS extends Fragment
                         @Override
                         public void onMessage(WebSocket webSocket, String text)
                         {
+                            Log.d(TAG, "语音识别返回: " + text);
+
+                            JSONObject json = JSONObject.parseObject(text);
+                            if (json.containsKey("error_code") && "SIS.0004".equals(json.getString("error_code"))) {
+                                requireActivity().runOnUiThread(() ->
+                                        Toast.makeText(requireContext(),
+                                                "当前项目未开通实时语音识别服务，请在华为云控制台开通",
+                                                Toast.LENGTH_LONG).show()
+                                );
+                            }
                             String recognizedText = parseRecognizedText(text);
                             if (!recognizedText.isEmpty()) {
                                 result[0] = recognizedText;
@@ -412,6 +434,30 @@ public class TabDS extends Fragment
     }
 
 
+    private String pendingSpeakText = null;
+
+        private void speakText(String text) {
+            if (!isTtsReady) {
+                Log.w(TAG, "TTS 尚未初始化完成，缓存播报内容");
+                pendingSpeakText = text;
+                return;
+            }
+            tts.speak(text, TextToSpeech.QUEUE_FLUSH, null, "TTS_ID");
+        }
+
+            private void initTTS() {
+                tts = new TextToSpeech(requireContext(), status -> {
+                    if (status == TextToSpeech.SUCCESS) {
+                        isTtsReady = true;
+                        if (pendingSpeakText != null) {
+                            tts.speak(pendingSpeakText, TextToSpeech.QUEUE_FLUSH, null, "TTS_ID");
+                            pendingSpeakText = null;
+                        }
+                    }
+                });
+            }
+
+
     // 读取音频文件
     private byte[] readAudioFile()
     {
@@ -424,12 +470,15 @@ public class TabDS extends Fragment
         }
     }
 
-    private void sendTextToDeepSeek(String text) {
+    private void sendTextToDeepSeek(String text)
+    {
         MediaType mediaType = MediaType.parse("application/json");
         JSONObject payload = new JSONObject();
+        speakText("正在生成中");
 
         // 构造请求 JSON
         payload.put("model", "deepseek-chat");
+//        payload.put("stream", true); // 开启流式传输
 
         JSONArray messages = new JSONArray();
 
@@ -499,24 +548,6 @@ public class TabDS extends Fragment
     }
 
 
-
-
-    // 文字转语音
-    private void speakText(String text) {
-        if (!isSpeakEnabled || !isTtsInitialized || text == null || text.isEmpty()) {
-            return;
-        }
-
-        if (textToSpeech.isSpeaking()) {
-            textToSpeech.stop();
-        }
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            textToSpeech.speak(text, TextToSpeech.QUEUE_FLUSH, null, null);
-        } else {
-            textToSpeech.speak(text, TextToSpeech.QUEUE_FLUSH, null);
-        }
-    }
 
     // 修改语速
     public void setSpeechRate(float rate) {
@@ -598,24 +629,136 @@ public class TabDS extends Fragment
                         if (answer.length() > 200) {
                             answer = answer.substring(0, 200) + "...";
                         }
+
+                        final String finalAnswer = answer;
+
+                        // 切回 UI 线程
+                        requireActivity().runOnUiThread(() -> {
+                            // 更新 UI 显示
+                            tv_sendspeeddata.setText(finalAnswer);
+                            // 异步播报
+                            speakText(finalAnswer);
+                        });
+
                         return answer;
                     }
+
                 }
             }
 
+
             Log.e(TAG, "DeepSeek API响应错误: " + response.code() + " " + response.body().string());
+
+
+
             return "抱歉，未能获取到回答";
+        }
+    }
+
+
+    // 获取华为云认证Token
+    private String getHuaweiAuthToken() throws IOException
+    {
+        String url = "https://iam.cn-north-4.myhuaweicloud.com/v3/auth/tokens";
+
+        JSONObject auth = new JSONObject();
+        JSONObject identity = new JSONObject();
+        identity.put("methods", new String[]{"password"});
+
+        JSONObject password = new JSONObject();
+        JSONObject user = new JSONObject();
+        JSONObject domain = new JSONObject();
+        domain.put("name", "yangjl_neu");
+        user.put("domain", domain);
+        user.put("name", "yangjl_neu");
+        user.put("password", "qq3416702178");
+        password.put("user", user);
+
+        identity.put("password", password);
+        auth.put("identity", identity);
+
+        JSONObject scope = new JSONObject();
+        JSONObject project = new JSONObject();
+        project.put("name", "cn-north-4");
+        scope.put("project", project);
+        auth.put("scope", scope);
+
+        JSONObject requestBody = new JSONObject();
+        requestBody.put("auth", auth);
+
+        MediaType mediaType = MediaType.parse("application/json");
+        RequestBody body = RequestBody.create(mediaType, requestBody.toJSONString());
+
+        Request request = new Request.Builder()
+                .url(url)
+                .method("POST", body)
+                .addHeader("Content-Type", "application/json;charset=UTF-8")
+                .build();
+
+        Response response = client.newCall(request).execute();
+        if (response.isSuccessful() && response.headers().get("X-Subject-Token") != null) {
+            return response.headers().get("X-Subject-Token");
+        } else {
+            Log.e(TAG, "获取Token失败: " + response.code() + " " + response.body().string());
+            return null;
         }
     }
 
 
 
 
+    private boolean isReady = false; // 是否初始化完成
+
+    // 初始化 TTS
+    public void init(Context context) {
+        tts = new TextToSpeech(context, status -> {
+            if (status == TextToSpeech.SUCCESS) {
+                int result = tts.setLanguage(Locale.CHINESE); // 设置中文
+                if (result != TextToSpeech.LANG_MISSING_DATA &&
+                        result != TextToSpeech.LANG_NOT_SUPPORTED) {
+                    isReady = true;
+                }
+            }
+        });
+    }
 
 
+    // 停止播放
+    public void stop() {
+        if (tts != null) {
+            tts.stop();
+        }
+    }
+
+    // 释放资源
+    public void shutdown()
+    {
+        if (tts != null) {
+            tts.stop();
+            tts.shutdown();
+        }
+    }
 
 
-
+    private void testTTS() {
+        if (tts == null) {
+            tts = new TextToSpeech(requireContext(), status -> {
+                if (status == TextToSpeech.SUCCESS) {
+                    int result = tts.setLanguage(Locale.CHINESE);
+                    if (result != TextToSpeech.LANG_MISSING_DATA &&
+                            result != TextToSpeech.LANG_NOT_SUPPORTED) {
+                        tts.speak("语音播报测试成功", TextToSpeech.QUEUE_FLUSH, null, "TTS_TEST");
+                    } else {
+                        Log.e(TAG, "TTS 不支持中文或缺少数据");
+                    }
+                } else {
+                    Log.e(TAG, "TTS 初始化失败");
+                }
+            });
+        } else {
+            tts.speak("语音播报测试成功", TextToSpeech.QUEUE_FLUSH, null, "TTS_TEST");
+        }
+    }
 
 }
 
@@ -623,51 +766,13 @@ public class TabDS extends Fragment
 
 
 
-//// 获取华为云认证Token
-//private String getHuaweiAuthToken() throws IOException {
-//    String url = "https://iam.cn-north-4.myhuaweicloud.com/v3/auth/tokens";
-//
-//    JSONObject auth = new JSONObject();
-//    JSONObject identity = new JSONObject();
-//    identity.put("methods", new String[]{"password"});
-//
-//    JSONObject password = new JSONObject();
-//    JSONObject user = new JSONObject();
-//    JSONObject domain = new JSONObject();
-//    domain.put("name", "cgh_date");
-//    user.put("domain", domain);
-//    user.put("name", "cgh_date2025");
-//    user.put("password", "zheng22800988");
-//    password.put("user", user);
-//
-//    identity.put("password", password);
-//    auth.put("identity", identity);
-//
-//    JSONObject scope = new JSONObject();
-//    JSONObject project = new JSONObject();
-//    project.put("name", huaweiRegion);
-//    scope.put("project", project);
-//    auth.put("scope", scope);
-//
-//    JSONObject requestBody = new JSONObject();
-//    requestBody.put("auth", auth);
-//
-//    MediaType mediaType = MediaType.parse("application/json");
-//    RequestBody body = RequestBody.create(mediaType, requestBody.toJSONString());
-//
-//    Request request = new Request.Builder()
-//            .url(url)
-//            .method("POST", body)
-//            .addHeader("Content-Type", "application/json;charset=UTF-8")
-//            .build();
-//
-//    Response response = client.newCall(request).execute();
-//    if (response.isSuccessful() && response.headers().get("X-Subject-Token") != null) {
-//        return response.headers().get("X-Subject-Token");
-//    } else {
-//        Log.e(TAG, "获取Token失败: " + response.code() + " " + response.body().string());
-//        return null;
-//    }
-//}
+
+
+
+
+
+
+
+
 
 
