@@ -367,7 +367,7 @@ public class MainActivity<usbIoManager> extends AppCompatActivity
                 final String finalCoco = coco;
                 final String finalLight = light;
                 final String finalangle = angle;
-                final String finalconc = conc;
+                final String finalconc = conc.length() >= 3 ? conc.substring(conc.length() - 3) : conc;
                 final String finalggoodAmount = gamount;
                 final String finalbbadAmount = bamount;
 

@@ -75,14 +75,13 @@ public class TabControlFm extends Fragment {
                 isFanOn = !isFanOn;
                 if (isFanOn)
                 {
-                    control_f.setBackgroundResource(R.drawable.fan_on);
                     ((MainActivity)getActivity()).SetTheFanstatus("ON", client1, AToken1);
+                    control_f.setBackgroundResource(R.drawable.fan_on);
                 }
                 else
                 {
-                    control_f.setBackgroundResource(R.drawable.fan_off);
                     ((MainActivity)getActivity()).SetTheFanstatus("OFF", client1, AToken1);
-
+                    control_f.setBackgroundResource(R.drawable.fan_off);
                 }
             }
         });
