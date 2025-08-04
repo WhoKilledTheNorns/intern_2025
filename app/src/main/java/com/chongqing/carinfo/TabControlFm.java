@@ -5,6 +5,8 @@
 package com.chongqing.carinfo;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -37,11 +39,14 @@ public class TabControlFm extends Fragment {
     private boolean isLightOn = false;
     private boolean isFanOn = false;
     private boolean autoMannual = false;
+    // 定义一个标记变量，控制是否允许触发事件
+    private int onclickrecord = 0;
+
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
-                             @Nullable Bundle savedInstanceState)
+    public View onCreateView( LayoutInflater inflater,  ViewGroup container,
+                              Bundle savedInstanceState)
     {
         viewControl = inflater.inflate(R.layout.tab_cfm_control, container, false);
 
@@ -174,9 +179,11 @@ public class TabControlFm extends Fragment {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean a) {
 
+                // 如果正在处理中，直接返回，不响应新的事件
+
 
                 if (buttonView.isPressed()) {
-                    if (!buttonView.isChecked()) {
+                    if (!buttonView.isChecked()) { //关状态发ON
                         //下发开灯
                         body = RequestBody.create(mediaType, "{\n" +
                                 " \"service_id\": \"smartcontrol\",\n" +
@@ -188,7 +195,9 @@ public class TabControlFm extends Fragment {
                         msg_presh = 1;
                         sendMessage(client,AToken,body);
 
-                    } else {
+
+                    } else
+                        {
                         //下发关灯
 
                         body = RequestBody.create(mediaType, "{\n" +
@@ -199,25 +208,26 @@ public class TabControlFm extends Fragment {
                                 " }\n" +
                                 "}");
                         msg_presh = 1;
+
                         sendMessage(client,AToken,body);
                     }
-
                 }
             }
         });
 
 
 
-        if (msg_presh != 1) {//msg_presh 是防止文字乱变 图片更换
-            if (lightSt.compareTo("OFF") == 0) {
-//                lightold.setImageResource(R.drawable.light_off);
-                control.setChecked(true);
-            } else {
-//                lightold.setImageResource(R.drawable.light_on);
-                control.setChecked(false);
-            }
-        } else
-            msg_presh = 0;
+//        if (msg_presh != 1) {//msg_presh 是防止文字乱变 图片更换
+//            if (lightSt.compareTo("0") == 0) {
+////                lightold.setImageResource(R.drawable.light_off);
+//
+//                control.setChecked(true);
+//            } else {
+////                lightold.setImageResource(R.drawable.light_on);
+//                control.setChecked(false);
+//            }
+//        } else
+//            msg_presh = 0;
 
 
     }
@@ -232,13 +242,12 @@ public class TabControlFm extends Fragment {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean a) {
 
-
                 if (buttonView.isPressed()) {
                     if (!buttonView.isChecked()) {
                         //下发开风扇
                         body = RequestBody.create(mediaType, "{\n" +
                                 " \"service_id\": \"smartcontrol\",\n" +
-                                " \"command_name\": \"Light\",\n" +
+                                " \"command_name\": \"Fan\",\n" +
                                 " \"paras\": {\n" +
                                 "  \"Fan\": \"ON\"\n" +
                                 " }\n" +
@@ -251,7 +260,7 @@ public class TabControlFm extends Fragment {
 
                         body = RequestBody.create(mediaType, "{\n" +
                                 " \"service_id\": \"smartcontrol\",\n" +
-                                " \"command_name\": \"Light\",\n" +
+                                " \"command_name\": \"Fan\",\n" +
                                 " \"paras\": {\n" +
                                 "  \"Fan\": \"OFF\"\n" +
                                 " }\n" +
@@ -264,16 +273,16 @@ public class TabControlFm extends Fragment {
             }
         });
 
-        if (msg_presh != 1) {//msg_presh 是防止文字乱变 图片更换
-            if (FanSt.compareTo("OFF") == 0) {
-
-                control.setChecked(true);
-            } else {
-
-                control.setChecked(false);
-            }
-        } else
-            msg_presh = 0;
+//        if (msg_presh!= 1) {//msg_presh 是防止文字乱变 图片更换
+//            if (FanSt.compareTo("0") == 0) {
+//
+//                control.setChecked(true);
+//            } else {
+//
+//                control.setChecked(false);
+//            }
+//        } else
+//            msg_presh = 0;
 
 
     }
